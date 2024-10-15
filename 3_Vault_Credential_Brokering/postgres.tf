@@ -15,7 +15,7 @@ data "aws_ami" "ubuntu_ami" {
 resource "aws_security_group" "public_network_ssh_postgres" {
   name        = "public_ssh_postgres"
   description = "Allow SSH and Postgres inbound traffic"
-  vpc_id      = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id      = data.tfe_outputs.platform.values.vpc
 
   ingress {
     from_port   = 22
@@ -52,7 +52,7 @@ data "aws_subnet" "example_subnet" {
 
   filter {
     name   = "vpc-id"
-    values = [data.terraform_remote_state.local_backend.outputs.vpc]
+    values = [data.tfe_outputs.platform.values.vpc]
   }
 }
 
