@@ -1,6 +1,7 @@
 username        = "admin"
 password        = "SuperSecret123!"
-tier            = "plus_small"
+vault_tier      = "plus_small"
+boundary_tier   = "standard"
 datadog_api_key = "your key" # Remove code relative to Datadog if Not required
 aws_vpc_cidr    = "172.31.0.0/16" 
 vault_cluster_id    = "hcp-vault-cluster-for-boundary"
