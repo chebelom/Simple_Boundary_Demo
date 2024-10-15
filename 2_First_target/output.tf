@@ -14,7 +14,7 @@ output "ssh_connect_target-id" {
 }
 
 output "ssh-key-private" {
-  value = tls_private_key.rsa_4096_key.private_key_pem
+  value = nonsensitive(tls_private_key.rsa_4096_key.private_key_pem)
 }
 
 output "ssh-key-public" {
