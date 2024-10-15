@@ -5,5 +5,5 @@ output "boundary_token" {
 }
 
 output "vault_ca" {
-  value = vault_ssh_secret_backend_ca.boundary.public_key
+  value = chomp(vault_ssh_secret_backend_ca.boundary.public_key)
 }
