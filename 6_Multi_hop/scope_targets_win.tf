@@ -49,7 +49,7 @@ resource "boundary_credential_username_password" "example" {
   description         = "Credentials for Windows Host"
   credential_store_id = boundary_credential_store_static.example.id
   username            = "Administrator"
-  password            = rsadecrypt(aws_instance.windows-server.password_data, file("../2_First_target/${var.key_pair_name}.pem"))
+  password            = rsadecrypt(aws_instance.windows-server.password_data, data.tfe_outputs.first-target-2.values.ssh-key-private)
 
 }
 
