@@ -47,3 +47,9 @@ data "tfe_outputs" "platform" {
   organization = "hashicorp-italy"
   workspace = "Platform"
 }
+
+# Remote Backend to obtain Vault Token 
+data "tfe_outputs" "vault-config-4" {
+  organization = "hashicorp-italy"
+  workspace = "4_Vault_SSH_Injection-vault-config"
+}

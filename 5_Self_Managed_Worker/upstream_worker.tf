@@ -81,7 +81,7 @@ locals {
   boundary_ingress_worker_hcl_config = <<-WORKER_HCL_CONFIG
   disable_mlock = true
 
-  hcp_boundary_cluster_id = "${split(".", split("//", data.terraform_remote_state.local_backend.outputs.boundary_public_url)[1])[0]}"
+  hcp_boundary_cluster_id = "${split(".", split("//", data.tfe_outputs.platform.values.boundary_public_url)[1])[0]}"
 
   listener "tcp" {
     address = "0.0.0.0:9202"
