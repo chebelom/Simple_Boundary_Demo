@@ -54,6 +54,12 @@ data "tfe_outputs" "first-target-2" {
 }
 
 # Remote Backend to obtain Vault Token 
+data "tfe_outputs" "vault-config-4" {
+  organization = "hashicorp-italy"
+  workspace = "4_Vault_SSH_Injection-vault-config"
+}
+
+# Remote Backend to obtain Vault Token 
 data "tfe_outputs" "self-managed-5" {
   organization = "hashicorp-italy"
   workspace = "5_Self_Managed_Worker"
