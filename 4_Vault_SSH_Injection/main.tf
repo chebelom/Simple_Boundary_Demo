@@ -32,19 +32,13 @@ provider "boundary" {
 }
 
 # Remote Backend to obtain VPC details 
-data "terraform_remote_state" "local_backend" {
-  backend = "local"
-
-  config = {
-    path = "../1_Plataforma/terraform.tfstate"
-  }
+data "tfe_outputs" "platform" {
+  organization = "hashicorp-italy"
+  workspace = "Platform"
 }
 
 # Remote Backend to obtain Vault Token 
-data "terraform_remote_state" "local_backend_vault" {
-  backend = "local"
-
-  config = {
-    path = "vault_config/terraform.tfstate"
-  }
+data "tfe_outputs" "vault-config-4" {
+  organization = "hashicorp-italy"
+  workspace = "4_Vault_SSH_Injection-vault-config"
 }
