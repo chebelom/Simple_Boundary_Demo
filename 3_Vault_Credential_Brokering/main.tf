@@ -56,3 +56,8 @@ data "tfe_outputs" "platform" {
   organization = "hashicorp-italy"
   workspace = "Platform"
 }
+
+data "tfe_outputs" "first-target-2" {
+  organization = "hashicorp-italy"
+  workspace = "2_First_target"
+}
