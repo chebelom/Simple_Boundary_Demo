@@ -45,7 +45,7 @@ provider "vault" {
 # Remote Backend to obtain VPC details 
 data "tfe_outputs" "platform" {
   organization = "hashicorp-italy"
-  workspace = "Platform"
+  workspace = "1_Platform"
 }
 
 # Remote Backend to obtain Vault Token 

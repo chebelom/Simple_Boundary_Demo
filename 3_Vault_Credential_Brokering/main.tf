@@ -54,7 +54,7 @@ provider "vault" {
 
 data "tfe_outputs" "platform" {
   organization = "hashicorp-italy"
-  workspace = "Platform"
+  workspace = "1_Platform"
 }
 
 data "tfe_outputs" "first-target-2" {
