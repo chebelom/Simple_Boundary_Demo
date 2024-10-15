@@ -14,7 +14,8 @@ data "aws_ami" "ubuntu_ami" {
 
 
 resource "aws_subnet" "subnet1" {
-  vpc_id                  = data.terraform_remote_state.local_backend.outputs.vpc
+  # vpc_id                  = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id                  = data.tfe_outputs.platform.vpc
   cidr_block              = "172.31.1.0/24"
   map_public_ip_on_launch = "true" //it makes this a public subnet
   availability_zone       = "eu-west-2a"
@@ -24,14 +25,16 @@ resource "aws_subnet" "subnet1" {
 }
 
 resource "aws_internet_gateway" "prod-igw" {
-  vpc_id = data.terraform_remote_state.local_backend.outputs.vpc
+  # vpc_id = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id = data.tfe_outputs.platform.vpc
   tags = {
     Name = "prod-igw"
   }
 }
 
 resource "aws_route_table" "prod-public-crt" {
-  vpc_id = data.terraform_remote_state.local_backend.outputs.vpc
+  # vpc_id = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id = data.tfe_outputs.platform.vpc
 
   route {
     //associated subnet can reach everywhere
@@ -43,7 +46,8 @@ resource "aws_route_table" "prod-public-crt" {
   # Route traffic to the HVN peering connection
   route {
     cidr_block                = "172.25.16.0/20"
-    vpc_peering_connection_id = data.terraform_remote_state.local_backend.outputs.peering_id
+    # vpc_peering_connection_id = data.terraform_remote_state.local_backend.outputs.peering_id
+    vpc_peering_connection_id = data.tfe_outputs.platform.peering_id
   }
 
   tags = {
@@ -71,7 +75,8 @@ data "http" "current" {
 resource "aws_security_group" "public_network_boundary_ssh" {
   name        = "public_ssh"
   description = "Allow SSH inbound traffic"
-  vpc_id      = data.terraform_remote_state.local_backend.outputs.vpc
+  # vpc_id      = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id      = data.tfe_outputs.platform.vpc
 
   ingress {
     from_port   = 22
