@@ -5,5 +5,5 @@ output "boundary_token" {
 }
 
 output "vault_ca" {
-  value = vault_ssh_secret_backend_ca.public_key
+  value = vault_ssh_secret_backend_ca.boundary.public_key
 }
