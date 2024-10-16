@@ -44,5 +44,6 @@ resource "kubernetes_namespace" "vault" {
 resource "kubernetes_service_account" "vault" {
   metadata {
     name = "vault"
+    namespace = "vault"
   }
 }
