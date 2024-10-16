@@ -228,3 +228,7 @@ resource "kubernetes_manifest" "rolebinding_test_test_role_abilities" {
     ]
   }
 }
+
+output "token" {
+  value = kubernetes_secret.vault.data["token"]
+}
