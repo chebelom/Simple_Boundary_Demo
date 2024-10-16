@@ -26,3 +26,17 @@ provider "kubernetes" {
     command     = "aws"
   }
 }
+
+resource "kubernetes_namespace" "vault" {
+  metadata {
+    annotations = {
+      name = "vault"
+    }
+
+    labels = {
+      mylabel = "vault"
+    }
+
+    name = "vault"
+  }
+}
