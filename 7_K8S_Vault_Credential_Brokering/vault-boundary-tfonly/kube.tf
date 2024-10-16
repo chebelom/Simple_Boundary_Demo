@@ -59,7 +59,7 @@ resource "kubernetes_secret" "vault" {
     name = "vault"
     namespace = "vault"
   }
-  
+
   type = "kubernetes.io/service-account-token"
   wait_for_service_account_token = true
 }
@@ -76,5 +76,155 @@ resource "kubernetes_namespace" "test" {
     }
 
     name = "test"
+  }
+}
+
+resource "kubernetes_manifest" "clusterrolebinding_vault_token_creator_binding" {
+  manifest = {
+    "apiVersion" = "rbac.authorization.k8s.io/v1"
+    "kind" = "ClusterRoleBinding"
+    "metadata" = {
+      "name" = "vault-token-creator-binding"
+    }
+    "roleRef" = {
+      "apiGroup" = "rbac.authorization.k8s.io"
+      "kind" = "ClusterRole"
+      "name" = "k8s-full-secrets-abilities-with-labels"
+    }
+    "subjects" = [
+      {
+        "kind" = "ServiceAccount"
+        "name" = "vault"
+        "namespace" = "vault"
+      },
+    ]
+  }
+}
+
+resource "kubernetes_manifest" "clusterrole_k8s_full_secrets_abilities_with_labels" {
+  manifest = {
+    "apiVersion" = "rbac.authorization.k8s.io/v1"
+    "kind" = "ClusterRole"
+    "metadata" = {
+      "name" = "k8s-full-secrets-abilities-with-labels"
+    }
+    "rules" = [
+      {
+        "apiGroups" = [
+          "",
+        ]
+        "resources" = [
+          "namespaces",
+        ]
+        "verbs" = [
+          "get",
+        ]
+      },
+      {
+        "apiGroups" = [
+          "",
+        ]
+        "resources" = [
+          "serviceaccounts",
+          "serviceaccounts/token",
+        ]
+        "verbs" = [
+          "create",
+          "update",
+          "delete",
+        ]
+      },
+      {
+        "apiGroups" = [
+          "rbac.authorization.k8s.io",
+        ]
+        "resources" = [
+          "rolebindings",
+          "clusterrolebindings",
+        ]
+        "verbs" = [
+          "create",
+          "update",
+          "delete",
+        ]
+      },
+      {
+        "apiGroups" = [
+          "rbac.authorization.k8s.io",
+        ]
+        "resources" = [
+          "roles",
+          "clusterroles",
+        ]
+        "verbs" = [
+          "bind",
+          "escalate",
+          "create",
+          "update",
+          "delete",
+        ]
+      },
+    ]
+  }
+}
+
+resource "kubernetes_manifest" "serviceaccount_test_test_service_account_with_generated_token" {
+  manifest = {
+    "apiVersion" = "v1"
+    "kind" = "ServiceAccount"
+    "metadata" = {
+      "name" = "test-service-account-with-generated-token"
+      "namespace" = "test"
+    }
+  }
+}
+
+resource "kubernetes_manifest" "role_test_test_role_list_create_delete_pods" {
+  manifest = {
+    "apiVersion" = "rbac.authorization.k8s.io/v1"
+    "kind" = "Role"
+    "metadata" = {
+      "name" = "test-role-list-create-delete-pods"
+      "namespace" = "test"
+    }
+    "rules" = [
+      {
+        "apiGroups" = [
+          "",
+        ]
+        "resources" = [
+          "pods",
+        ]
+        "verbs" = [
+          "list",
+          "create",
+          "update",
+          "delete",
+        ]
+      },
+    ]
+  }
+}
+
+resource "kubernetes_manifest" "rolebinding_test_test_role_abilities" {
+  manifest = {
+    "apiVersion" = "rbac.authorization.k8s.io/v1"
+    "kind" = "RoleBinding"
+    "metadata" = {
+      "name" = "test-role-abilities"
+      "namespace" = "test"
+    }
+    "roleRef" = {
+      "apiGroup" = "rbac.authorization.k8s.io"
+      "kind" = "Role"
+      "name" = "test-role-list-create-delete-pods"
+    }
+    "subjects" = [
+      {
+        "kind" = "ServiceAccount"
+        "name" = "test-service-account-with-generated-token"
+        "namespace" = "test"
+      },
+    ]
   }
 }
