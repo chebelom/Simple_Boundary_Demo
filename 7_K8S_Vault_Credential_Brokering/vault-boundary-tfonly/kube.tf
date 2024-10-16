@@ -18,7 +18,7 @@ data "aws_eks_cluster_auth" "example" {
 provider "kubernetes" {
   host                   = data.tfe_outputs.eks.values.cluster_endpoint
 #   cluster_ca_certificate = base64decode(data.aws_eks_cluster.example.certificate_authority[0].data)
-  cluster_ca_certificate = base64decode(data.tfe_outputs.eks.values.cluster_name.certificate_authority[0].data)
+  cluster_ca_certificate = base64decode(data.tfe_outputs.eks.values.cluster_certificate_authority_data)
   
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
@@ -37,6 +37,12 @@ resource "kubernetes_namespace" "vault" {
       mylabel = "vault"
     }
 
+    name = "vault"
+  }
+}
+
+resource "kubernetes_service_account" "vault" {
+  metadata {
     name = "vault"
   }
 }
