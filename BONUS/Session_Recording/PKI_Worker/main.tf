@@ -46,11 +46,10 @@ provider "vault" {
   namespace = "admin" # Set for HCP Vault
 }
 
-# Remote Backend to obtain VPC details 
-data "terraform_remote_state" "local_backend" {
-  backend = "local"
-
-  config = {
-    path = "../../../1_Plataforma/terraform.tfstate"
-  }
+# Remote Backend to obtain Vault Token 
+data "tfe_outputs" "vault-config-4" {
+  organization = "hashicorp-italy"
+  workspace = "4_Vault_SSH_Injection-vault-config"
 }
+
+# base64encode("${data.tfe_outputs.vault-config-4.values.vault_ca}")
