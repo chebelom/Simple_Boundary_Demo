@@ -46,6 +46,11 @@ provider "vault" {
   namespace = "admin" # Set for HCP Vault
 }
 
+data "tfe_outputs" "platform" {
+  organization = "hashicorp-italy"
+  workspace = "1_Platform"
+}
+
 # Remote Backend to obtain Vault Token 
 data "tfe_outputs" "vault-config-4" {
   organization = "hashicorp-italy"
