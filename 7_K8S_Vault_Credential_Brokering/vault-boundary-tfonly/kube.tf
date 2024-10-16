@@ -6,12 +6,12 @@ data "tfe_outputs" "eks" {
 
 
 data "aws_eks_cluster" "example" {
-  name = "example"
+  name = data.tfe_outputs.eks.values.cluster_name
 }
 
 
 data "aws_eks_cluster_auth" "example" {
-  name = "example"
+  name = data.tfe_outputs.eks.values.cluster_name
 }
 
 
