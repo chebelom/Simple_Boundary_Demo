@@ -229,6 +229,10 @@ resource "kubernetes_manifest" "rolebinding_test_test_role_abilities" {
   }
 }
 
-output "token" {
+output "k8s_token" {
   value = nonsensitive(kubernetes_secret.vault.data["token"])
+}
+
+output "k8s_ca" {
+  value = nonsensitive(kubernetes_secret.vault.data["ca.crt"])
 }
