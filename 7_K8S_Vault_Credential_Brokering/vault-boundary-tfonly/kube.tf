@@ -55,10 +55,26 @@ resource "kubernetes_secret" "vault" {
   metadata {
     annotations = {
       "kubernetes.io/service-account.name" = kubernetes_service_account.vault.metadata.0.name
+    }
     name = "vault"
     namespace = "vault"
-    }
   }
+  
   type = "kubernetes.io/service-account-token"
   wait_for_service_account_token = true
+}
+
+
+resource "kubernetes_namespace" "test" {
+  metadata {
+    annotations = {
+      name = "test"
+    }
+
+    labels = {
+      mylabel = "test"
+    }
+
+    name = "test"
+  }
 }
