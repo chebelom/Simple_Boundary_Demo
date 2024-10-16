@@ -25,7 +25,7 @@ locals {
       permissions = "0644"
       owner       = "root:root"
       encoding    = "b64"
-      content     = "${data.tfe_outputs.vault-config-4.values.vault_ca}"
+      content     = base64encode("${data.tfe_outputs.vault-config-4.values.vault_ca}")
     },
   ]
 })}
