@@ -47,3 +47,16 @@ resource "kubernetes_service_account" "vault" {
     namespace = "vault"
   }
 }
+
+resource "kubernetes_secret" "vault" {
+  metadata {
+    annotations = {
+      "kubernetes.io/service-account.name" = kubernetes_service_account.vault.metadata.0.name
+    }
+
+    generate_name = "terraform-vault-"
+  }
+
+  type                           = "kubernetes.io/service-account-token"
+  wait_for_service_account_token = true
+}
