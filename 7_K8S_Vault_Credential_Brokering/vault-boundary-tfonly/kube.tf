@@ -17,7 +17,6 @@ data "aws_eks_cluster_auth" "example" {
 
 provider "kubernetes" {
   host                   = data.tfe_outputs.eks.values.cluster_endpoint
-#   cluster_ca_certificate = base64decode(data.aws_eks_cluster.example.certificate_authority[0].data)
   cluster_ca_certificate = base64decode(data.tfe_outputs.eks.values.cluster_certificate_authority_data)
   
   exec {
@@ -229,10 +228,3 @@ resource "kubernetes_manifest" "rolebinding_test_test_role_abilities" {
   }
 }
 
-output "k8s_token" {
-  value = nonsensitive(kubernetes_secret.vault.data["token"])
-}
-
-output "k8s_ca" {
-  value = nonsensitive(kubernetes_secret.vault.data["ca.crt"])
-}
