@@ -46,6 +46,9 @@ resource "kubernetes_service_account" "vault" {
     name = "vault"
     namespace = "vault"
   }
+    timeouts {
+    create = "3m"
+  }
 }
 
 resource "kubernetes_secret" "vault" {
