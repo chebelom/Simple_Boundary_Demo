@@ -45,7 +45,7 @@ data "tfe_outputs" "platform" {
 
 # Declare the provider for the HashiCorp Boundary resource to be managed by Terraform
 provider "boundary" {
-  # addr = data.tfe_outputs.platform.values.boundary_public_url
+  addr = data.tfe_outputs.platform.values.boundary_public_url
   # auth_method_id         = var.authmethod
   auth_method_login_name = var.username
   auth_method_password   = var.password
