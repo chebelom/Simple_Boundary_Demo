@@ -47,7 +47,7 @@ resource "tfe_variable" "password" {
 
 resource "tfe_variable" "region" {
   key             = "region"
-  value           = "eu-west-3"
+  value           = "eu-west-1"
   category        = "terraform"
   description     = "AWS region"
   variable_set_id = tfe_variable_set.boundary-varset.id
