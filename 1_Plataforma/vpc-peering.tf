@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.region
-}
-
 resource "aws_vpc" "peer" {
   cidr_block = var.aws_vpc_cidr
 
