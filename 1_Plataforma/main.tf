@@ -27,5 +27,5 @@ provider "doormat" {}
 
 data "doormat_aws_credentials" "creds" {
   provider = doormat
-  role_arn = "arn:aws:iam::${var.aws_account_id}:role/tfc-doormat-role_2_firsttarget"
+  role_arn = "arn:aws:iam::${var.aws_account_id}:role/tfc-doormat-role_1_platform"
 }
