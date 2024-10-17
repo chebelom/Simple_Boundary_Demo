@@ -14,11 +14,10 @@ data "aws_ami" "ubuntu_ami" {
 
 
 resource "aws_subnet" "subnet1" {
-  # vpc_id                  = data.terraform_remote_state.local_backend.outputs.vpc
   vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.1.0/24"
   map_public_ip_on_launch = "true" //it makes this a public subnet
-  availability_zone       = "eu-west-2a"
+  availability_zone       = "${var.region}a"
   tags = {
     Name = "subnet1"
   }
