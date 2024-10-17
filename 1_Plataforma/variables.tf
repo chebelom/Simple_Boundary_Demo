@@ -4,11 +4,11 @@ variable "boundary_cluster_id" {
   default     = "boundary-cluster"
 }
 
-variable "username" {
+variable "boundary_username" {
   type = string
 }
 
-variable "password" {
+variable "boundary_password" {
   type = string
 }
 
@@ -60,11 +60,11 @@ variable "boundary_tier" {
   default     = "Plus"
 }
 
-# Remove if not rquired
-variable "datadog_api_key" {
-  type        = string
-  description = "Datadog API KEY"
-}
+# # Remove if not rquired
+# variable "datadog_api_key" {
+#   type        = string
+#   description = "Datadog API KEY"
+# }
 
 variable "aws_vpc_cidr" {
   type        = string
