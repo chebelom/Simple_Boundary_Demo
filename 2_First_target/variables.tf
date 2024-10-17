@@ -27,6 +27,7 @@ variable "key_pair_name" {
 variable "scenario1_alias" {
   type        = string
   description = "Alias for first target"
+  default = "first-target.boundary.demo"
 }
 
 variable "aws_account_id" {
