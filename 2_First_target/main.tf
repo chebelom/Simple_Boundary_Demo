@@ -47,8 +47,8 @@ data "tfe_outputs" "platform" {
 provider "boundary" {
   addr = data.tfe_outputs.platform.values.boundary_public_url
   # auth_method_id         = var.authmethod
-  auth_method_login_name = var.username
-  auth_method_password   = var.password
+  auth_method_login_name = var.boundary_username
+  auth_method_password   = var.boundary_password
 
 }
 

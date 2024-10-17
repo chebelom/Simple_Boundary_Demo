@@ -1,11 +1,9 @@
-variable "username" {
+variable "boundary_username" {
   type = string
-  default = "admin"
 }
 
-variable "password" {
+variable "boundary_password" {
   type = string
-  default =  "SuperSecret123!"
 }
 
 variable "region" {
