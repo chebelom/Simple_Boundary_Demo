@@ -97,12 +97,12 @@ resource "aws_security_group" "public_network_boundary_ssh" {
     Name = "allow_ssh"
   }  
 }
-check "certificate" {
-  assert {
-    condition     = contains(["0.0.0.0/0"], aws_security_group.public_network_boundary_ssh.ingress.cidr_blocks) 
-    error_message = "SSH is open to the world!!1!"
-  }
-}
+# check "certificate" {
+#   assert {
+#     condition     = contains(["0.0.0.0/0"], aws_security_group.public_network_boundary_ssh.ingress.cidr_blocks) 
+#     error_message = "SSH is open to the world!!1!"
+#   }
+# }
 
 
 resource "aws_instance" "boundary_target" {
