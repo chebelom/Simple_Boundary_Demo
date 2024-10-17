@@ -99,7 +99,7 @@ resource "aws_security_group" "public_network_boundary_ssh" {
 }
 check "certificate" {
   assert {
-    condition     = contains(["0.0.0.0/0"], aws_security_group.public_network_boundary_ssh.cidr_blocks) 
+    condition     = contains(["0.0.0.0/0"], aws_security_group.public_network_boundary_ssh.ingress.cidr_blocks) 
     error_message = "SSH is open to the world!!1!"
   }
 }
