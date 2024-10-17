@@ -4,7 +4,6 @@ variable "boundary_cluster_id" {
   default     = "boundary-cluster"
 }
 
-
 variable "username" {
   type = string
 }
@@ -52,13 +51,13 @@ variable "cloud_provider" {
 variable "vault_tier" {
   description = "Tier of the HCP Vault cluster. Valid options for tiers."
   type        = string
-  default     = "standard"
+  default     = "plus_small"
 }
 
 variable "boundary_tier" {
   description = "Tier of the HCP Boundary cluster. Valid options for tiers."
   type        = string
-  default     = "STANDARD"
+  default     = "Plus"
 }
 
 # Remove if not rquired
@@ -70,4 +69,5 @@ variable "datadog_api_key" {
 variable "aws_vpc_cidr" {
   type        = string
   description = "VPC CIDR"
+  default = "172.31.0.0/16"
 }

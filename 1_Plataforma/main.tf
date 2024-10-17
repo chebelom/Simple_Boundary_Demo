@@ -7,12 +7,14 @@ terraform {
     }
     hcp = {
       source = "hashicorp/hcp"
-      # version = "0.63.0"
-      version = "0.89.0"
+      version = "0.97.0"
     }
     aws = {
       source  = "hashicorp/aws"
-      version = "5.7.0"
+      version = "5.72.1"
     }
   }
+}
+
+provider "hcp" {
 }
