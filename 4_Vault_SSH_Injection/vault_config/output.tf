@@ -4,3 +4,6 @@ output "boundary_token" {
   sensitive = true
 }
 
+output "vault_ca" {
+  value = chomp(vault_ssh_secret_backend_ca.boundary.public_key)
+}

@@ -18,8 +18,8 @@ resource "boundary_scope" "project" {
 resource "boundary_credential_store_vault" "vault" {
   name        = "certificates-store"
   description = "My second Vault credential store!"
-  address     = data.terraform_remote_state.local_backend.outputs.vault_public_url
-  token       = data.terraform_remote_state.local_backend_vault.outputs.boundary_token
+  address     = data.tfe_outputs.platform.values.vault_public_url
+  token       = data.tfe_outputs.vault-config-4.values.boundary_token
   scope_id    = boundary_scope.project.id
   namespace   = "admin"
 }

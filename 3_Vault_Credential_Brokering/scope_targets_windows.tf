@@ -9,7 +9,7 @@ resource "boundary_scope" "project_w" {
 resource "boundary_credential_store_vault" "vault_w" {
   name        = "vault_win"
   description = "My KV"
-  address     = data.terraform_remote_state.local_backend.outputs.vault_public_url
+  address     = data.tfe_outputs.platform.values.vault_public_url
   token       = vault_token.boundary_token_kv.client_token
   scope_id    = boundary_scope.project_w.id
   namespace   = "admin"

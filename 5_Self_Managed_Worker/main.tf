@@ -37,16 +37,19 @@ provider "boundary" {
 }
 
 provider "vault" {
-  address = data.terraform_remote_state.local_backend.outputs.vault_public_url
+  address = data.tfe_outputs.platform.values.vault_public_url
   # token     = var.vault_token
   namespace = "admin" # Set for HCP Vault
 }
 
 # Remote Backend to obtain VPC details 
-data "terraform_remote_state" "local_backend" {
-  backend = "local"
+data "tfe_outputs" "platform" {
+  organization = "hashicorp-italy"
+  workspace = "1_Platform"
+}
 
-  config = {
-    path = "../1_Plataforma/terraform.tfstate"
-  }
+# Remote Backend to obtain Vault Token 
+data "tfe_outputs" "vault-config-4" {
+  organization = "hashicorp-italy"
+  workspace = "4_Vault_SSH_Injection-vault-config"
 }

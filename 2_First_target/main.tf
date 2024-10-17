@@ -35,11 +35,16 @@ provider "boundary" {
 
 }
 
-# Remote Backend to obtain VPC details 
-data "terraform_remote_state" "local_backend" {
-  backend = "local"
+# # Remote Backend to obtain VPC details 
+# data "terraform_remote_state" "local_backend" {
+#   backend = "local"
 
-  config = {
-    path = "../1_Plataforma/terraform.tfstate"
-  }
+#   config = {
+#     path = "../1_Plataforma/terraform.tfstate"
+#   }
+# }
+
+data "tfe_outputs" "platform" {
+  organization = "hashicorp-italy"
+  workspace = "1_Platform"
 }

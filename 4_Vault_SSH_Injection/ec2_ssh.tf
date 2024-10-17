@@ -16,7 +16,7 @@ data "aws_ami" "ubuntu_ami" {
 resource "aws_security_group" "public_network_ssh" {
   name        = "public_ssh_injection"
   description = "Allow SSH inbound traffic"
-  vpc_id      = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id      = data.tfe_outputs.platform.values.vpc
 
   ingress {
     from_port   = 22
@@ -47,7 +47,7 @@ data "aws_subnet" "example_subnet" {
 
   filter {
     name   = "vpc-id"
-    values = [data.terraform_remote_state.local_backend.outputs.vpc]
+    values = [data.tfe_outputs.platform.values.vpc]
   }
 }
 
@@ -66,7 +66,7 @@ locals {
       permissions = "0644"
       owner       = "root:root"
       encoding    = "b64"
-      content     = filebase64("vault_ca.pub")
+      content     = base64encode("${data.tfe_outputs.vault-config-4.values.vault_ca}")
     },
   ]
 })}

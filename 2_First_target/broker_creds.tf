@@ -9,6 +9,6 @@ resource "boundary_credential_ssh_private_key" "example" {
   description         = "My first ssh private key credential!"
   credential_store_id = boundary_credential_store_static.example.id
   username            = "ubuntu"
-  private_key         = file("${var.key_pair_name}.pem") # change to valid SSH Private Key
+  private_key         = tls_private_key.rsa_4096_key.private_key_pem
   depends_on          = [aws_key_pair.ec2_key]
 }

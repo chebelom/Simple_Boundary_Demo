@@ -2,7 +2,15 @@
 resource "vault_policy" "ssh_signer" {
   name = "ssh"
 
-  policy = file("ssh_policy.hcl")
+  policy = <<-EOT
+    path "ssh-client-signer/issue/boundary-client" {
+      capabilities = ["create", "update"]
+    }
+
+    path "ssh-client-signer/sign/boundary-client" {
+      capabilities = ["create", "update"]
+    }
+    EOT
 }
 
 resource "vault_mount" "ssh" {
@@ -18,9 +26,9 @@ resource "vault_ssh_secret_backend_ca" "boundary" {
   backend              = vault_mount.ssh.path
   generate_signing_key = true
 
-  provisioner "local-exec" {
-    command = "echo '${self.public_key}' > ../vault_ca.pub"
-  }
+  # provisioner "local-exec" {
+  #   command = "echo '${self.public_key}' > ../vault_ca.pub"
+  # }
 }
 
 

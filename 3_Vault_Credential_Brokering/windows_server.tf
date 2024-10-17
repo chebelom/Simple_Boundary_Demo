@@ -16,7 +16,7 @@ data "aws_ami" "windows-2019" {
 resource "aws_security_group" "public_network_http_rdp" {
   name        = "public_http_rdp"
   description = "Allow HTTP and RDP inbound traffic"
-  vpc_id      = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id      = data.tfe_outputs.platform.values.vpc
 
   ingress {
     from_port   = 80

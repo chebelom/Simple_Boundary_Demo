@@ -16,7 +16,7 @@ output "targetWindows_privateIP" {
 }
 
 output "targetWindows_creds_decrypted" {
-  value = rsadecrypt(aws_instance.windows-server.password_data, file("../2_First_target/${var.key_pair_name}.pem"))
+  value = nonsensitive(rsadecrypt(aws_instance.windows-server.password_data, data.tfe_outputs.first-target-2.values.ssh-key-private))
 }
 
 output "postgres_dbAdmin_connect" {

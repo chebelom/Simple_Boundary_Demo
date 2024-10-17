@@ -1,13 +1,13 @@
 data "aws_internet_gateway" "default" {
   filter {
     name   = "attachment.vpc-id"
-    values = [data.terraform_remote_state.local_backend.outputs.vpc]
+    values = [data.tfe_outputs.platform.values.vpc]
   }
 }
 
 # Deploy 2 Public Subnets
 resource "aws_subnet" "public1" {
-  vpc_id                  = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.20.0/24"
   availability_zone       = "eu-west-2a"
   map_public_ip_on_launch = true
@@ -18,7 +18,7 @@ resource "aws_subnet" "public1" {
 }
 
 resource "aws_subnet" "public2" {
-  vpc_id                  = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.21.0/24"
   availability_zone       = "eu-west-2b"
   map_public_ip_on_launch = true
@@ -30,7 +30,7 @@ resource "aws_subnet" "public2" {
 
 # Deploy 2 Private Subnets
 resource "aws_subnet" "private1" {
-  vpc_id                  = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.22.0/24"
   availability_zone       = "eu-west-2a"
   map_public_ip_on_launch = false
@@ -41,7 +41,7 @@ resource "aws_subnet" "private1" {
 }
 
 resource "aws_subnet" "private2" {
-  vpc_id                  = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.23.0/24"
   availability_zone       = "eu-west-2b"
   map_public_ip_on_launch = false
@@ -52,7 +52,7 @@ resource "aws_subnet" "private2" {
 }
 # Deploy Route Table
 resource "aws_route_table" "rt" {
-  vpc_id = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id = data.tfe_outputs.platform.values.vpc
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -62,7 +62,7 @@ resource "aws_route_table" "rt" {
   # Route traffic to the HVN peering connection
   route {
     cidr_block                = "172.25.16.0/20"
-    vpc_peering_connection_id = data.terraform_remote_state.local_backend.outputs.peering_id
+    vpc_peering_connection_id = data.tfe_outputs.platform.values.peering_id
   }
 
   tags = {
@@ -85,7 +85,7 @@ resource "aws_route_table_association" "route2" {
 resource "aws_security_group" "publicsg" {
   name        = "sshrecording-upstream-worker"
   description = "SSH + Boundary port"
-  vpc_id      = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id      = data.tfe_outputs.platform.values.vpc
 
   # To allow direct connections from clients and downstream workers
   ingress {
@@ -113,7 +113,7 @@ resource "aws_security_group" "publicsg" {
 resource "aws_security_group" "privatesg" {
   name        = "sshrecording-privatesg"
   description = "Allow traffic"
-  vpc_id      = data.terraform_remote_state.local_backend.outputs.vpc
+  vpc_id      = data.tfe_outputs.platform.values.vpc
 
   ingress {
     from_port       = 3306
