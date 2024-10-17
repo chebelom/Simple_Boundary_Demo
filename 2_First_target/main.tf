@@ -39,17 +39,15 @@ provider "aws" {
 }
 
 data "tfe_outputs" "platform" {
-  organization = "hashicorp-italy"
+  organization = var.tfc_organization
   workspace = "1_Platform"
 }
 
 # Declare the provider for the HashiCorp Boundary resource to be managed by Terraform
 provider "boundary" {
   addr = data.tfe_outputs.platform.values.boundary_public_url
-  # auth_method_id         = var.authmethod
   auth_method_login_name = var.boundary_username
   auth_method_password   = var.boundary_password
-
 }
 
 

@@ -9,7 +9,6 @@ variable "boundary_password" {
 variable "region" {
   description = "The region of the HCP HVN and Vault cluster."
   type        = string
-  # default     = "eu-west-2"
 }
 
 variable "key_pair_name" {
@@ -29,5 +28,9 @@ variable "scenario1_alias" {
 }
 
 variable "aws_account_id" {
+  type = string
+}
+
+variable "tfc_organization" {
   type = string
 }
