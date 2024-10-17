@@ -92,7 +92,7 @@ resource "tfe_workspace_run" "platform" {
 
 # workspace definitions
 resource "tfe_workspace" "first-target" {
-  name          = "2_first_target"
+  name          = "2_first-target"
   organization  = var.tfc_organization
   project_id    = var.tfc_project_id
 
@@ -125,4 +125,21 @@ resource "tfe_workspace_run" "first_target" {
     retry_attempts    = 5
     retry_backoff_min = 5
   }
+}
+
+resource "tfe_workspace" "creds-brokering" {
+  name          = "3-creds-brokering"
+  organization  = var.tfc_organization
+  project_id    = var.tfc_project_id
+
+  vcs_repo {
+    identifier = var.repo_identifier
+    oauth_token_id = var.oauth_token_id
+    branch = var.repo_branch
+  }
+
+  working_directory = "3_Vault_Credential_Brokering"
+  queue_all_runs = false
+  assessments_enabled = false
+  global_remote_state = true
 }
