@@ -20,7 +20,7 @@ provider "tfe" {}
 # variable sets
 resource "tfe_variable_set" "boundary-varset" {
   name          = "Simple Boundary Demo Varset"
-  description   = "Simple Boundary Demo Varset."
+  description   = "Managed by terraform"
   organization  = var.tfc_organization
 }
 

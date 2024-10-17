@@ -6,10 +6,6 @@ variable "tfc_project_id" {
   type = string
 }
 
-variable "tfc_project_name" {
-  type = string
-}
-
 variable "repo_identifier" {
   type = string
 }
