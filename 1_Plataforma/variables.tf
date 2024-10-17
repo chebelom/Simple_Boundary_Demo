@@ -71,3 +71,7 @@ variable "aws_vpc_cidr" {
   description = "VPC CIDR"
   default = "172.31.0.0/16"
 }
+
+variable "aws_account_id" {
+  type = string
+}
