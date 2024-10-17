@@ -91,7 +91,7 @@ resource "tfe_workspace_run" "platform" {
 }
 
 # workspace definitions
-resource "tfe_workspace" "2-first-target" {
+resource "tfe_workspace" "first-target" {
   name          = "2_first_target"
   organization  = var.tfc_organization
   project_id    = var.tfc_project_id
@@ -110,8 +110,8 @@ resource "tfe_workspace" "2-first-target" {
 
 
 # workspace runs
-resource "tfe_workspace_run" "2_first_target" {
-  workspace_id    = tfe_workspace.2-first-target.id
+resource "tfe_workspace_run" "first_target" {
+  workspace_id    = tfe_workspace.first-target.id
 
   apply {
     manual_confirm    = false
