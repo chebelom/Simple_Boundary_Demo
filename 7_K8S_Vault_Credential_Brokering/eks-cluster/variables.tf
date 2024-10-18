@@ -1,11 +1,31 @@
-variable "aws_region" {
+variable "region" {
   description = "AWS region"
   type        = string
-  default     = "eu-west-2"
 }
 
 variable "vpc_name" {
   type    = string
   default = "eks-cluster"
+}
 
+variable "boundary_username" {
+  type = string
+}
+
+variable "boundary_password" {
+  type = string
+}
+
+
+variable "aws_account_id" {
+  type = string
+}
+
+variable "tfc_organization" {
+  type = string
+}
+
+variable "scenario6_alias" {
+  type = string
+  default = "scenario6.k8s.boundary.demo"
 }

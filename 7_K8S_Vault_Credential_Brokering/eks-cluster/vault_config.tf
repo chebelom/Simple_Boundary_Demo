@@ -15,7 +15,7 @@ resource "vault_kubernetes_secret_backend" "config" {
   description               = "kubernetes secrets engine description"
   default_lease_ttl_seconds = 43200
   max_lease_ttl_seconds     = 86400
-  kubernetes_host           = data.tfe_outputs.eks.values.cluster_endpoint
+  kubernetes_host           = module.eks.cluster_endpoint
   kubernetes_ca_cert        = kubernetes_secret.vault.data["ca.crt"]
   service_account_jwt       = kubernetes_secret.vault.data["token"]
   disable_local_ca_jwt      = true

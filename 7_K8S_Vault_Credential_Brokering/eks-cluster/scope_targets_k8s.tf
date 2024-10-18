@@ -45,7 +45,7 @@ resource "boundary_host_catalog_static" "k8s" {
 
 # Remove https part from EKS host URL
 locals {
-  url_without_protocol = replace(data.tfe_outputs.eks.values.cluster_endpoint, "https://", "")
+  url_without_protocol = replace(module.eks.cluster_endpoint, "https://", "")
 }
 
 resource "boundary_host_static" "k8s" {

@@ -1,7 +1,12 @@
 resource "vault_policy" "policy_k8s" {
   name = "k8s-policy"
 
-  policy = file("kubernetes_policy.hcl")
+  # policy = file("kubernetes_policy.hcl")
+  policy = <<-EOT
+        path "kubernetes/creds/my-role" {
+          capabilities = ["update"]
+        }
+    EOT
 }
 
 
@@ -10,10 +15,11 @@ resource "vault_kubernetes_secret_backend" "config" {
   description               = "kubernetes secrets engine description"
   default_lease_ttl_seconds = 43200
   max_lease_ttl_seconds     = 86400
-  kubernetes_host           = var.kubernetes_host
-  kubernetes_ca_cert        = file("ca.crt")
-  service_account_jwt       = file("token.txt")
+  kubernetes_host           = data.tfe_outputs.eks.values.cluster_endpoint
+  kubernetes_ca_cert        = kubernetes_secret.vault.data["ca.crt"]
+  service_account_jwt       = kubernetes_secret.vault.data["token"]
   disable_local_ca_jwt      = true
+  depends_on = [ kubernetes_service_account.vault ]
 }
 
 resource "vault_kubernetes_secret_backend_role" "sa-example" {
