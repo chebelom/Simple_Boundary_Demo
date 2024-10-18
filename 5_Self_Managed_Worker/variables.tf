@@ -12,7 +12,7 @@ variable "region" {
 }
 
 variable "scenario4_alias" {
-  type        = string
+  type    = string
   default = "scenario4.ssh.injected.boundary.demo"
 }
 

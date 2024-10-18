@@ -51,20 +51,20 @@ provider "boundary" {
 
 
 provider "vault" {
-  address = data.tfe_outputs.platform.values.vault_public_url
+  address   = data.tfe_outputs.platform.values.vault_public_url
   namespace = "admin" # Set for HCP Vault
-  token = data.tfe_outputs.platform.values.vault_token
+  token     = data.tfe_outputs.platform.values.vault_token
 }
 
 
 # Remote Backend to obtain VPC details 
 data "tfe_outputs" "platform" {
   organization = var.tfc_organization
-  workspace = "1_Platform"
+  workspace    = "1_Platform"
 }
 
 # # Remote Backend to obtain Vault Token 
 data "tfe_outputs" "vault-config-4" {
   organization = var.tfc_organization
-  workspace = "4-injection"
+  workspace    = "4-injection"
 }
