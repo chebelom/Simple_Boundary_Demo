@@ -78,6 +78,12 @@ resource "aws_instance" "postgres_target" {
   }
 }
 
+resource "time_sleep" "wait_forpostgres" {
+  depends_on = [aws_instance.postgres_target]
+
+  create_duration = "60s"
+}
+
 /* Configuring postgress Database as per 
 https://developer.hashicorp.com/boundary/tutorials/credential-management/hcp-vault-cred-brokering-quickstart#setup-postgresql-northwind-demo-database
 */
