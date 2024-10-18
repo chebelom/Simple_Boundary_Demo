@@ -59,11 +59,11 @@ provider "vault" {
 }
 
 data "tfe_outputs" "platform" {
-  organization = "hashicorp-italy"
+  organization = vat.tfc_organization
   workspace = "1_Platform"
 }
 
 data "tfe_outputs" "first-target-2" {
-  organization = "hashicorp-italy"
-  workspace = "2_First_target"
+  organization = var.tfc_organization
+  workspace = "2_first-target"
 }

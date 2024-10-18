@@ -45,3 +45,7 @@ variable "scenario2_alias_win_rdp" {
 variable "aws_account_id" {
   type = string
 }
+
+variable "tfc_organization" {
+  type = string
+}
