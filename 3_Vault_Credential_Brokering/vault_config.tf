@@ -30,6 +30,8 @@ resource "vault_database_secret_backend_connection" "postgres" {
     username       = "vault"
     password       = "vault-password"
   }
+
+  depends_on = [ aws_instance.postgres_target ]
 }
 
 resource "vault_database_secret_backend_role" "dba" {
