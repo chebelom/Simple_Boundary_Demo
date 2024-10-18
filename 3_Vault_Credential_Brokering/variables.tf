@@ -8,12 +8,12 @@ variable "password" {
 
 variable "postgres_password" {
   type = string
+  default = "One1-siu-risotto"
 }
 
 variable "region" {
   description = "The region of the HCP HVN and Vault cluster."
   type        = string
-  default     = "eu-west-2"
 }
 
 variable "windows_instance_name" {
@@ -24,10 +24,7 @@ variable "windows_instance_name" {
 
 variable "key_pair_name" {
   type = string
-}
-
-variable "authmethod" {
-  type = string
+  default = "demo-boundary-keys"
 }
 
 variable "scenario2_alias_dba" {
