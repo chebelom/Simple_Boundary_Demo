@@ -49,7 +49,7 @@ provider "boundary" {
 }
 
 resource "hcp_vault_cluster_admin_token" "root_token" {
-  cluster_id = data.tfe_outputs.platform.values.vault_cluster_id
+  cluster_id = "vault-cluster" # TODO: use the variable 
 }
 
 provider "vault" {
