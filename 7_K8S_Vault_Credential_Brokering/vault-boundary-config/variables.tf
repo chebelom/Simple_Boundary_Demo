@@ -4,23 +4,28 @@ variable "aws_region" {
   default     = "eu-west-2"
 }
 
-variable "username" {
+variable "boundary_username" {
   type = string
 }
 
-variable "password" {
+variable "boundary_password" {
   type = string
 }
 
-# variable "kubernetes_host" {
-#   type = string
-# }
-
-variable "authmethod" {
-  type = string
+variable "region" {
+  description = "The region of the HCP HVN and Vault cluster."
+  type        = string
 }
 
 variable "scenario6_alias" {
   type = string
   default = "scenario6.k8s.boundary.demo"
+}
+
+variable "aws_account_id" {
+  type = string
+}
+
+variable "tfc_organization" {
+  type = string
 }
