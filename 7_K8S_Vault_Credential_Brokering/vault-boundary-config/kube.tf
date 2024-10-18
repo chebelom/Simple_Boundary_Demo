@@ -1,24 +1,3 @@
-data "aws_eks_cluster" "example" {
-  name = data.tfe_outputs.eks.values.cluster_name
-}
-
-
-data "aws_eks_cluster_auth" "example" {
-  name = data.tfe_outputs.eks.values.cluster_name
-}
-
-
-provider "kubernetes" {
-  host                   = data.tfe_outputs.eks.values.cluster_endpoint
-  cluster_ca_certificate = base64decode(data.tfe_outputs.eks.values.cluster_certificate_authority_data)
-  
-  exec {
-    api_version = "client.authentication.k8s.io/v1beta1"
-    args        = ["eks", "get-token", "--cluster-name", data.tfe_outputs.eks.values.cluster_name]
-    command     = "aws"
-  }
-}
-
 resource "kubernetes_namespace" "vault" {
   metadata {
     annotations = {

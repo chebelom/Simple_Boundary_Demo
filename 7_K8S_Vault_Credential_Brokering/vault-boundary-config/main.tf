@@ -5,7 +5,6 @@ terraform {
       source  = "hashicorp/boundary"
       version = "1.1.15"
     }
-
     vault = {
       source  = "hashicorp/vault"
       version = "3.17.0"
@@ -46,6 +45,17 @@ provider "aws" {
   access_key = data.doormat_aws_credentials.creds.access_key
   secret_key = data.doormat_aws_credentials.creds.secret_key
   token      = data.doormat_aws_credentials.creds.token
+}
+
+provider "kubernetes" {
+  host                   = data.tfe_outputs.eks.values.cluster_endpoint
+  cluster_ca_certificate = base64decode(data.tfe_outputs.eks.values.cluster_certificate_authority_data)
+  
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    args        = ["eks", "get-token", "--cluster-name", data.tfe_outputs.eks.values.cluster_name]
+    command     = "aws"
+  }
 }
 
 # Remote Backend to obtain VPC details 
