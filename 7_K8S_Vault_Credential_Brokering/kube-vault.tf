@@ -98,6 +98,7 @@ resource "kubernetes_manifest" "clusterrolebinding_vault_token_creator_binding" 
       },
     ]
   }
+  depends_on = [ module.eks ]
 }
 
 resource "kubernetes_manifest" "clusterrole_k8s_full_secrets_abilities_with_labels" {
