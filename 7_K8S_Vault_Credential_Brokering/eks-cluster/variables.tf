@@ -24,8 +24,3 @@ variable "aws_account_id" {
 variable "tfc_organization" {
   type = string
 }
-
-variable "scenario6_alias" {
-  type = string
-  default = "scenario6.k8s.boundary.demo"
-}
