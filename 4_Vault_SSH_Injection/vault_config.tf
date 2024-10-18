@@ -25,10 +25,6 @@ resource "vault_mount" "ssh" {
 resource "vault_ssh_secret_backend_ca" "boundary" {
   backend              = vault_mount.ssh.path
   generate_signing_key = true
-
-  # provisioner "local-exec" {
-  #   command = "echo '${self.public_key}' > ../vault_ca.pub"
-  # }
 }
 
 

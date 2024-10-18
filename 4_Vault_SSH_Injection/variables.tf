@@ -1,15 +1,14 @@
-variable "username" {
+variable "boundary_username" {
   type = string
 }
 
-variable "password" {
+variable "boundary_password" {
   type = string
 }
 
 variable "region" {
   description = "The region of the HCP HVN and Vault cluster."
   type        = string
-  default     = "eu-west-2"
 }
 
 variable "authmethod" {
@@ -20,4 +19,12 @@ variable "scenario3_alias" {
   type        = string
   description = "Alias for first target"
   default = "scenario3.ssh.injected.boundary.demo"
+}
+
+variable "aws_account_id" {
+  type = string
+}
+
+variable "tfc_organization" {
+  type = string
 }
