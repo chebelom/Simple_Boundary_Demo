@@ -52,7 +52,7 @@ data "aws_subnet" "example_subnet" {
 
   filter {
     name   = "vpc-id"
-    values = [data.tfe_outputs.platform.values.vpc]
+    values = [data.tfe_outputs.platform.values.vpc.id]
   }
 }
 
