@@ -24,7 +24,7 @@ provider "boundary" {
 
 provider "vault" {
   address = data.tfe_outputs.platform.values.vault_public_url
-  # token     = var.vault_token
+  token     = data.tfe_outputs.platform.values.vault_token
   namespace = "admin" # Set for HCP Vault
 }
 

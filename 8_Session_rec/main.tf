@@ -36,7 +36,7 @@ provider "doormat" {}
 
 data "doormat_aws_credentials" "creds" {
   provider = doormat
-  role_arn = "arn:aws:iam::${var.aws_account_id}:role/tfc-doormat-role_7-k8s"
+  role_arn = "arn:aws:iam::${var.aws_account_id}:role/tfc-doormat-role_8-session-rec"
 }
 
 # Declare the provider for the AWS resource to be managed by Terraform
@@ -57,7 +57,7 @@ provider "boundary" {
 
 provider "vault" {
   address = data.tfe_outputs.platform.values.vault_public_url
-  # token     = var.vault_token
+  token     = data.tfe_outputs.platform.values.vault_token
   namespace = "admin" # Set for HCP Vault
 }
 
