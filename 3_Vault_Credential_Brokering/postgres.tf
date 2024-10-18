@@ -81,7 +81,7 @@ resource "aws_instance" "postgres_target" {
 resource "time_sleep" "wait_forpostgres" {
   depends_on = [aws_instance.postgres_target]
 
-  create_duration = "60s"
+  create_duration = "90s"
 }
 
 /* Configuring postgress Database as per 
