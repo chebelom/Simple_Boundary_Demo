@@ -1,8 +1,3 @@
-variable "aws_region" {
-  description = "AWS region"
-  type        = string
-}
-
 variable "boundary_username" {
   type = string
 }
