@@ -49,7 +49,7 @@ resource "vault_database_secret_backend_role" "analyst" {
 resource "vault_policy" "northwind_database" {
   name = "northwind-database"
 
-  policy = file("northwind-database-policy.hcl")
+  policy = file("vault_policies/northwind-database-policy.hcl")
 }
 
 resource "vault_token" "boundary_token_dba" {
