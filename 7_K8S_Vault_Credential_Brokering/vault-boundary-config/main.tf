@@ -53,3 +53,8 @@ data "tfe_outputs" "platform" {
   organization = var.tfc_organization
   workspace = "1_Platform"
 }
+
+data "tfe_outputs" "eks" {
+  organization = var.tfc_organization
+  workspace = "7-k8s"
+}

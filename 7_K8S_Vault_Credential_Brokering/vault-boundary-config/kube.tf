@@ -1,10 +1,3 @@
-data "tfe_outputs" "eks" {
-  organization = "hashicorp-italy"
-  workspace = "7_K8S_Vault_Credential_Brokering-eks"
-}
-
-
-
 data "aws_eks_cluster" "example" {
   name = data.tfe_outputs.eks.values.cluster_name
 }
