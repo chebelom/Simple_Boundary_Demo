@@ -17,6 +17,11 @@ variable "scenario3_alias" {
   default = "scenario3.ssh.injected.boundary.demo"
 }
 
+variable "key_pair_name" {
+  type = string
+  default = "demo-boundary-keys"
+}
+
 variable "aws_account_id" {
   type = string
 }

@@ -52,7 +52,7 @@ data "aws_subnet" "example_subnet" {
 }
 
 data "aws_key_pair" "example" {
-  key_name           = "ec2-key"
+  key_name           = var.key_pair_name
   include_public_key = true
 }
 

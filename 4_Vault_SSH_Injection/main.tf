@@ -27,6 +27,7 @@ terraform {
 provider "vault" {
   address = data.tfe_outputs.platform.values.vault_public_url
   namespace = "admin" # Set for HCP Vault
+  token = data.tfe_outputs.platform.values.vault_token
 }
 
 provider "doormat" {}
@@ -47,7 +48,7 @@ provider "aws" {
 # Declare the provider for the HashiCorp Boundary resource to be managed by Terraform
 provider "boundary" {
   # Use variables to provide values for the provider configuration
-  addr                   = ""
+  addr                   = data.tfe_outputs.platform.values.boundary_public_url
   auth_method_login_name = var.boundary_username
   auth_method_password   = var.boundary_password
 }
