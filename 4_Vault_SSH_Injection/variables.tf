@@ -19,7 +19,7 @@ variable "scenario3_alias" {
 
 variable "key_pair_name" {
   type = string
-  default = "demo-boundary-keys"
+  default = "ec2-key"
 }
 
 variable "aws_account_id" {
