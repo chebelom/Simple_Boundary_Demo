@@ -55,7 +55,8 @@ resource "hcp_vault_cluster_admin_token" "root_token" {
 provider "vault" {
   address = data.tfe_outputs.platform.values.vault_public_url
   namespace = "admin" # Set for HCP Vault
-  token = hcp_vault_cluster_admin_token.root_token.token
+  token = var.tmp_tok
+  # token = hcp_vault_cluster_admin_token.root_token.token
 }
 
 data "tfe_outputs" "platform" {

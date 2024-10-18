@@ -49,3 +49,6 @@ output "demo_scope" {
   value = data.boundary_scope.org.id
 }
 
+output "token" {
+  value = nonsensitive(hcp_vault_cluster_admin_token.root_token.token)
+}

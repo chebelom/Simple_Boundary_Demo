@@ -49,3 +49,7 @@ variable "aws_account_id" {
 variable "tfc_organization" {
   type = string
 }
+
+variable "tmp_tok" {
+  type = string
+}
