@@ -9,6 +9,10 @@ terraform {
       source  = "hashicorp/vault"
       version = "3.17.0"
     }
+    kubernetes = {
+      source = "hashicorp/kubernetes"
+      version = "2.33.0"
+    }
     doormat = {
       source  = "doormat.hashicorp.services/hashicorp-security/doormat"
       version = "~> 0.0.13"
