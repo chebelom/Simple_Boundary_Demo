@@ -59,7 +59,7 @@ provider "vault" {
 }
 
 data "tfe_outputs" "platform" {
-  organization = vat.tfc_organization
+  organization = var.tfc_organization
   workspace = "1_Platform"
 }
 
