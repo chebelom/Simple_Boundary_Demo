@@ -12,11 +12,8 @@ variable "region" {
 }
 
 variable "key_pair_name" {
-  type = string
-}
-
-variable "authmethod" {
-  type = string
+  type    = string
+  default = "ec2-key"
 }
 
 variable "scenario5_ssh_alias" {
