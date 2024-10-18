@@ -44,3 +44,7 @@ variable "scenario2_alias_win_rdp" {
   type    = string
   default = "scenario2.winrdp.boundary.demo"
 }
+
+variable "aws_account_id" {
+  type = string
+}

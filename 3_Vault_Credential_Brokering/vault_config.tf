@@ -1,13 +1,13 @@
 resource "vault_policy" "boundary_controller" {
   name = "boundary-controller"
 
-  policy = file("boundary-controller-policy.hcl")
+  policy = file("vault_policies/boundary-controller-policy.hcl")
 }
 
 resource "vault_policy" "policy_windows" {
   name = "windows-policy"
 
-  policy = file("windows_static.hcl")
+  policy = file("vault_policies/windows_static.hcl")
 }
 
 resource "vault_mount" "database" {
@@ -30,21 +30,20 @@ resource "vault_database_secret_backend_connection" "postgres" {
     username       = "vault"
     password       = "vault-password"
   }
-
 }
 
 resource "vault_database_secret_backend_role" "dba" {
   backend             = vault_mount.database.path
   name                = "dba"
   db_name             = vault_database_secret_backend_connection.postgres.name
-  creation_statements = [file("dba.sql.hcl")]
+  creation_statements = [file("vault_policies/dba.sql.hcl")]
 }
 
 resource "vault_database_secret_backend_role" "analyst" {
   backend             = vault_mount.database.path
   name                = "analyst"
   db_name             = vault_database_secret_backend_connection.postgres.name
-  creation_statements = [file("analyst.sql.hcl")]
+  creation_statements = [file("vault_policies/analyst.sql.hcl")]
 }
 
 resource "vault_policy" "northwind_database" {

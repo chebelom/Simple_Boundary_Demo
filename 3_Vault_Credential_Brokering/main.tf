@@ -19,38 +19,44 @@ terraform {
       source  = "hashicorp/cloudinit"
       version = "2.3.2"
     }
+    doormat = {
+      source  = "doormat.hashicorp.services/hashicorp-security/doormat"
+      version = "~> 0.0.13"
+    }
   }
+}
+
+provider "doormat" {}
+
+data "doormat_aws_credentials" "creds" {
+  provider = doormat
+  role_arn = "arn:aws:iam::${var.aws_account_id}:role/tfc-doormat-role_3-creds-brokering"
 }
 
 # Declare the provider for the AWS resource to be managed by Terraform
 provider "aws" {
-  region = var.region
+  region     = var.region
+  access_key = data.doormat_aws_credentials.creds.access_key
+  secret_key = data.doormat_aws_credentials.creds.secret_key
+  token      = data.doormat_aws_credentials.creds.token
 }
 
 # Declare the provider for the HashiCorp Boundary resource to be managed by Terraform
 provider "boundary" {
-  # Use variables to provide values for the provider configuration
-  addr                   = ""
-  auth_method_id         = var.authmethod
+  addr                   = data.tfe_outputs.platform.values.boundary_public_url
   auth_method_login_name = var.username
   auth_method_password   = var.password
 }
 
-provider "vault" {
-  # address = data.terraform_remote_state.local_backend.outputs.vault_public_url
-  address = data.tfe_outputs.platform.values.vault_public_url
-  # token     = var.vault_token
-  namespace = "admin" # Set for HCP Vault
+resource "hcp_vault_cluster_admin_token" "root_token" {
+  cluster_id = data.tfe_outputs.platform.values.vault_cluster_id
 }
 
-# Remote Backend to obtain VPC details 
-# data "terraform_remote_state" "local_backend" {
-#   backend = "local"
-
-#   config = {
-#     path = "../1_Plataforma/terraform.tfstate"
-#   }
-# }
+provider "vault" {
+  address = data.tfe_outputs.platform.values.vault_public_url
+  namespace = "admin" # Set for HCP Vault
+  token = hcp_vault_cluster_admin_token.root_token.token
+}
 
 data "tfe_outputs" "platform" {
   organization = "hashicorp-italy"
