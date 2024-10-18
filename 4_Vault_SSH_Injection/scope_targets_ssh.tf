@@ -19,7 +19,7 @@ resource "boundary_credential_store_vault" "vault" {
   name        = "certificates-store"
   description = "My second Vault credential store!"
   address     = data.tfe_outputs.platform.values.vault_public_url
-  token       = data.tfe_outputs.vault-config-4.values.boundary_token
+  token       = vault_token.boundary_token.client_token
   scope_id    = boundary_scope.project.id
   namespace   = "admin"
 }
@@ -37,7 +37,6 @@ resource "boundary_credential_library_vault_ssh_certificate" "ssh" {
     permit-pty = ""
   }
 }
-
 
 
 resource "boundary_host_catalog_static" "aws_instance" {
@@ -82,7 +81,6 @@ resource "boundary_target" "ssh" {
   ]
 
 }
-
 
 resource "boundary_alias_target" "scenario3_ssh_injection" {
   name           = "Scenario3_ssh_injection"

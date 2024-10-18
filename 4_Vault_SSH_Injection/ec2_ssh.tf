@@ -40,9 +40,14 @@ resource "aws_security_group" "public_network_ssh" {
 
 # Retrieve information about subnet1 created previously
 data "aws_subnet" "example_subnet" {
+  # filter {
+  #   name   = "cidr-block"
+  #   values = ["172.31.1.0/24"]
+  # }
+
   filter {
-    name   = "cidr-block"
-    values = ["172.31.1.0/24"]
+    name   = "tag:Name"
+    values = ["subnet1"]
   }
 
   filter {
@@ -66,7 +71,7 @@ locals {
       permissions = "0644"
       owner       = "root:root"
       encoding    = "b64"
-      content     = base64encode("${data.tfe_outputs.vault-config-4.values.vault_ca}")
+      content     = base64encode(chomp(vault_ssh_secret_backend_ca.boundary.public_key))
     },
   ]
 })}
