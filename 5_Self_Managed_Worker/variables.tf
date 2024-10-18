@@ -6,14 +6,9 @@ variable "boundary_password" {
   type = string
 }
 
-
 variable "region" {
   description = "The region of the HCP HVN and Vault cluster."
   type        = string
-  default     = "eu-west-2"
-}
-variable "authmethod" {
-  type = string
 }
 
 variable "scenario4_alias" {
