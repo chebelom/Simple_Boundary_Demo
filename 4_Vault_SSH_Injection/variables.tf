@@ -11,10 +11,6 @@ variable "region" {
   type        = string
 }
 
-variable "authmethod" {
-  type = string
-}
-
 variable "scenario3_alias" {
   type        = string
   description = "Alias for first target"

@@ -48,9 +48,8 @@ provider "aws" {
 provider "boundary" {
   # Use variables to provide values for the provider configuration
   addr                   = ""
-  auth_method_id         = var.authmethod
-  auth_method_login_name = var.username
-  auth_method_password   = var.password
+  auth_method_login_name = var.boundary_username
+  auth_method_password   = var.boundary_password
 }
 
 # Remote Backend to obtain VPC details 
