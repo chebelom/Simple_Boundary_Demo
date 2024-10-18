@@ -13,13 +13,8 @@ variable "region" {
 
 variable "key_pair_name" {
   type = string
-  default = "demo-boundary-keys"
+  default = "ec2-key"
 }
-
-# variable "authmethod" {
-#   type = string
-# }
-
 
 variable "scenario1_alias" {
   type        = string
