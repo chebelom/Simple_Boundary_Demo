@@ -19,6 +19,10 @@ terraform {
       source  = "hashicorp/cloudinit"
       version = "2.3.2"
     }
+    doormat = {
+      source  = "doormat.hashicorp.services/hashicorp-security/doormat"
+      version = "~> 0.0.13"
+    }
   }
 }
 
