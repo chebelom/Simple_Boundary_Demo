@@ -9,7 +9,7 @@ data "aws_internet_gateway" "default" {
 resource "aws_subnet" "public1" {
   vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.10.0/24"
-  availability_zone       = "eu-west-2a"
+  availability_zone       = "${var.region}a"
   map_public_ip_on_launch = true
 
   tags = {
@@ -20,7 +20,7 @@ resource "aws_subnet" "public1" {
 resource "aws_subnet" "public2" {
   vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.11.0/24"
-  availability_zone       = "eu-west-2b"
+  availability_zone       = "${var.region}b"
   map_public_ip_on_launch = true
 
   tags = {
@@ -32,7 +32,7 @@ resource "aws_subnet" "public2" {
 resource "aws_subnet" "private1" {
   vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.12.0/24"
-  availability_zone       = "eu-west-2a"
+  availability_zone       = "${var.region}a"
   map_public_ip_on_launch = false
 
   tags = {
@@ -43,7 +43,7 @@ resource "aws_subnet" "private1" {
 resource "aws_subnet" "private2" {
   vpc_id                  = data.tfe_outputs.platform.values.vpc
   cidr_block              = "172.31.13.0/24"
-  availability_zone       = "eu-west-2b"
+  availability_zone       = "${var.region}b"
   map_public_ip_on_launch = false
 
   tags = {

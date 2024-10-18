@@ -1,8 +1,8 @@
-variable "username" {
+variable "boundary_username" {
   type = string
 }
 
-variable "password" {
+variable "boundary_password" {
   type = string
 }
 
@@ -19,4 +19,12 @@ variable "authmethod" {
 variable "scenario4_alias" {
   type        = string
   default = "scenario4.ssh.injected.boundary.demo"
+}
+
+variable "aws_account_id" {
+  type = string
+}
+
+variable "tfc_organization" {
+  type = string
 }
