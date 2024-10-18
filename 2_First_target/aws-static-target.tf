@@ -44,7 +44,7 @@ resource "aws_route_table" "prod-public-crt" {
 
   # Route traffic to the HVN peering connection
   route {
-    cidr_block                = "172.25.16.0/20"
+    cidr_block = "172.25.16.0/20"
     # vpc_peering_connection_id = data.terraform_remote_state.local_backend.outputs.peering_id
     vpc_peering_connection_id = data.tfe_outputs.platform.values.peering_id
   }
@@ -75,7 +75,7 @@ resource "aws_security_group" "public_network_boundary_ssh" {
   name        = "public_ssh"
   description = "Allow SSH inbound traffic"
   # vpc_id      = data.terraform_remote_state.local_backend.outputs.vpc
-  vpc_id      = data.tfe_outputs.platform.values.vpc
+  vpc_id = data.tfe_outputs.platform.values.vpc
 
   ingress {
     from_port   = 22
@@ -94,7 +94,7 @@ resource "aws_security_group" "public_network_boundary_ssh" {
 
   tags = {
     Name = "allow_ssh"
-  }  
+  }
 }
 
 resource "aws_instance" "boundary_target" {

@@ -93,7 +93,7 @@ resource "aws_instance" "ssh_injection_target" {
   tags = {
     Name = "SSH Injection Boundary Target"
   }
-  depends_on = [ vault_ssh_secret_backend_role.signer ]
+  depends_on = [vault_ssh_secret_backend_role.signer]
 }
 
 

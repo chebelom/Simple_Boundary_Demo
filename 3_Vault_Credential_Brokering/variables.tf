@@ -7,7 +7,7 @@ variable "password" {
 }
 
 variable "postgres_password" {
-  type = string
+  type    = string
   default = "One1-siu-risotto"
 }
 
@@ -23,7 +23,7 @@ variable "windows_instance_name" {
 }
 
 variable "key_pair_name" {
-  type = string
+  type    = string
   default = "demo-boundary-keys"
 }
 

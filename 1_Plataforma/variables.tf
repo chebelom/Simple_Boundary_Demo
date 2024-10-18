@@ -68,7 +68,7 @@ variable "boundary_tier" {
 variable "aws_vpc_cidr" {
   type        = string
   description = "VPC CIDR"
-  default = "172.31.0.0/16"
+  default     = "172.31.0.0/16"
 }
 
 variable "aws_account_id" {

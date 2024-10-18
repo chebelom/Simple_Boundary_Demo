@@ -31,7 +31,7 @@ resource "vault_database_secret_backend_connection" "postgres" {
     password       = "vault-password"
   }
 
-  depends_on = [ time_sleep.wait_forpostgres ]
+  depends_on = [time_sleep.wait_forpostgres]
 }
 
 resource "vault_database_secret_backend_role" "dba" {

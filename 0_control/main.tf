@@ -19,13 +19,13 @@ provider "tfe" {}
 
 # variable sets
 resource "tfe_variable_set" "boundary-varset" {
-  name          = "Simple Boundary Demo Varset"
-  description   = "Managed by terraform"
-  organization  = var.tfc_organization
+  name         = "Simple Boundary Demo Varset"
+  description  = "Managed by terraform"
+  organization = var.tfc_organization
 }
 
 resource "tfe_project_variable_set" "boundary" {
-  project_id    = var.tfc_project_id
+  project_id      = var.tfc_project_id
   variable_set_id = tfe_variable_set.boundary-varset.id
 }
 
@@ -55,18 +55,18 @@ resource "tfe_variable" "region" {
 
 # workspace definitions
 resource "tfe_workspace" "platform" {
-  name          = "1_platform"
-  organization  = var.tfc_organization
-  project_id    = var.tfc_project_id
+  name         = "1_platform"
+  organization = var.tfc_organization
+  project_id   = var.tfc_project_id
 
   vcs_repo {
-    identifier = var.repo_identifier
+    identifier     = var.repo_identifier
     oauth_token_id = var.oauth_token_id
-    branch = var.repo_branch
+    branch         = var.repo_branch
   }
 
-  working_directory = "1_Plataforma"
-  queue_all_runs = false
+  working_directory   = "1_Plataforma"
+  queue_all_runs      = false
   assessments_enabled = false
   global_remote_state = true
 }
@@ -74,7 +74,7 @@ resource "tfe_workspace" "platform" {
 
 # workspace runs
 resource "tfe_workspace_run" "platform" {
-  workspace_id    = tfe_workspace.platform.id
+  workspace_id = tfe_workspace.platform.id
 
   apply {
     manual_confirm    = false
@@ -92,18 +92,18 @@ resource "tfe_workspace_run" "platform" {
 
 # workspace definitions
 resource "tfe_workspace" "first-target" {
-  name          = "2_first-target"
-  organization  = var.tfc_organization
-  project_id    = var.tfc_project_id
+  name         = "2_first-target"
+  organization = var.tfc_organization
+  project_id   = var.tfc_project_id
 
   vcs_repo {
-    identifier = var.repo_identifier
+    identifier     = var.repo_identifier
     oauth_token_id = var.oauth_token_id
-    branch = var.repo_branch
+    branch         = var.repo_branch
   }
 
-  working_directory = "2_First_target"
-  queue_all_runs = false
+  working_directory   = "2_First_target"
+  queue_all_runs      = false
   assessments_enabled = false
   global_remote_state = true
 }
@@ -111,7 +111,7 @@ resource "tfe_workspace" "first-target" {
 
 # workspace runs
 resource "tfe_workspace_run" "first_target" {
-  workspace_id    = tfe_workspace.first-target.id
+  workspace_id = tfe_workspace.first-target.id
 
   apply {
     manual_confirm    = false
@@ -128,86 +128,86 @@ resource "tfe_workspace_run" "first_target" {
 }
 
 resource "tfe_workspace" "creds-brokering" {
-  name          = "3-creds-brokering"
-  organization  = var.tfc_organization
-  project_id    = var.tfc_project_id
+  name         = "3-creds-brokering"
+  organization = var.tfc_organization
+  project_id   = var.tfc_project_id
 
   vcs_repo {
-    identifier = var.repo_identifier
+    identifier     = var.repo_identifier
     oauth_token_id = var.oauth_token_id
-    branch = var.repo_branch
+    branch         = var.repo_branch
   }
 
-  working_directory = "3_Vault_Credential_Brokering"
-  queue_all_runs = false
+  working_directory   = "3_Vault_Credential_Brokering"
+  queue_all_runs      = false
   assessments_enabled = false
   global_remote_state = true
 }
 
 resource "tfe_workspace" "creds-injection" {
-  name          = "4-injection"
-  organization  = var.tfc_organization
-  project_id    = var.tfc_project_id
+  name         = "4-injection"
+  organization = var.tfc_organization
+  project_id   = var.tfc_project_id
 
   vcs_repo {
-    identifier = var.repo_identifier
+    identifier     = var.repo_identifier
     oauth_token_id = var.oauth_token_id
-    branch = var.repo_branch
+    branch         = var.repo_branch
   }
 
-  working_directory = "4_Vault_SSH_Injection"
-  queue_all_runs = false
+  working_directory   = "4_Vault_SSH_Injection"
+  queue_all_runs      = false
   assessments_enabled = false
   global_remote_state = true
 }
 
 resource "tfe_workspace" "self-managed" {
-  name          = "5-self-managed"
-  organization  = var.tfc_organization
-  project_id    = var.tfc_project_id
+  name         = "5-self-managed"
+  organization = var.tfc_organization
+  project_id   = var.tfc_project_id
 
   vcs_repo {
-    identifier = var.repo_identifier
+    identifier     = var.repo_identifier
     oauth_token_id = var.oauth_token_id
-    branch = var.repo_branch
+    branch         = var.repo_branch
   }
 
-  working_directory = "5_Self_Managed_Worker"
-  queue_all_runs = false
+  working_directory   = "5_Self_Managed_Worker"
+  queue_all_runs      = false
   assessments_enabled = false
   global_remote_state = true
 }
 
 resource "tfe_workspace" "multi-hop" {
-  name          = "6-multi-hop"
-  organization  = var.tfc_organization
-  project_id    = var.tfc_project_id
+  name         = "6-multi-hop"
+  organization = var.tfc_organization
+  project_id   = var.tfc_project_id
 
   vcs_repo {
-    identifier = var.repo_identifier
+    identifier     = var.repo_identifier
     oauth_token_id = var.oauth_token_id
-    branch = var.repo_branch
+    branch         = var.repo_branch
   }
 
-  working_directory = "6_Multi_hop"
-  queue_all_runs = false
+  working_directory   = "6_Multi_hop"
+  queue_all_runs      = false
   assessments_enabled = false
   global_remote_state = true
 }
 
 resource "tfe_workspace" "kube" {
-  name          = "7-k8s"
-  organization  = var.tfc_organization
-  project_id    = var.tfc_project_id
+  name         = "7-k8s"
+  organization = var.tfc_organization
+  project_id   = var.tfc_project_id
 
   vcs_repo {
-    identifier = var.repo_identifier
+    identifier     = var.repo_identifier
     oauth_token_id = var.oauth_token_id
-    branch = var.repo_branch
+    branch         = var.repo_branch
   }
 
-  working_directory = "7_K8S_Vault_Credential_Brokering"
-  queue_all_runs = false
+  working_directory   = "7_K8S_Vault_Credential_Brokering"
+  queue_all_runs      = false
   assessments_enabled = false
   global_remote_state = true
 }

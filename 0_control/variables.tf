@@ -19,12 +19,12 @@ variable "oauth_token_id" {
 }
 
 variable "boundary_username" {
-  type = string
+  type    = string
   default = "admin"
 }
 
 variable "boundary_password" {
-  type = string
+  type      = string
   sensitive = true
 }
 
