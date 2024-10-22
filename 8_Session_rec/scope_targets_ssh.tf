@@ -218,3 +218,12 @@ resource "boundary_target" "ec2" {
 
   depends_on = [time_sleep.boundary_ready2]
 }
+
+resource "boundary_alias_target" "scenario_ssh_rec" {
+  name           = "Scenario3_ssh_injection"
+  description    = "Scenario3_ssh_injection"
+  scope_id       = "global"
+  value          = var.sshrec_alias
+  destination_id = boundary_target.ec2s.id
+  #authorize_session_host_id = boundary_host_static.bar.id
+}

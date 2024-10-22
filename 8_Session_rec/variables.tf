@@ -72,3 +72,7 @@ variable "common_tags" {
   description = "Map of common tags for all taggable AWS resources."
   default     = {}
 }
+
+variable "sshrec_alias" {
+  default = "ssh.recording.boundary.demo"
+}
