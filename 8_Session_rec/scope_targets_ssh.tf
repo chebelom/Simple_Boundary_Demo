@@ -220,8 +220,8 @@ resource "boundary_target" "ec2" {
 }
 
 resource "boundary_alias_target" "scenario_ssh_rec" {
-  name           = "Scenario3_ssh_injection"
-  description    = "Scenario3_ssh_injection"
+  name           = "Scenario3_ssh_Recording"
+  description    = "Scenario3_ssh_Recording"
   scope_id       = "global"
   value          = var.sshrec_alias
   destination_id = boundary_target.ec2.id

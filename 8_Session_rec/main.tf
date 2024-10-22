@@ -30,6 +30,18 @@ terraform {
   }
 }
 
+# terraform { 
+#   cloud { 
+    
+#     organization = "andreadetassis" 
+
+#     workspaces { 
+#       name = "8-session-rec" 
+#     } 
+#   } 
+# }
+
+
 # Declare the provider for the AWS resource to be managed by Terraform
 # Declare the provider for the AWS resource to be managed by Terraform
 provider "doormat" {}
