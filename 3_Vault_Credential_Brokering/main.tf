@@ -50,10 +50,6 @@ provider "boundary" {
 
 provider "hcp" {}
 
-# resource "hcp_vault_cluster_admin_token" "root_token" {
-#   cluster_id = "vault-cluster" # TODO: use the variable 
-# }
-
 provider "vault" {
   address   = data.tfe_outputs.platform.values.vault_public_url
   namespace = "admin" # Set for HCP Vault

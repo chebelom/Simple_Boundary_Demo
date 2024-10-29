@@ -4,6 +4,67 @@ The content of this demo is the result of Terraforming several of the Boundary a
 
 You need an AWS and HCP accounts.
 
+## Preparing your AWS account to leverage the doormat provider on TFC:
+
+1) navigate to the doormat-prereqs directory
+```
+cd 0_auth_doormat-run-me first/
+```
+2) paste your doormat generated AWS credentials, exporting them to your shell
+```
+export AWS_ACCESS_KEY_ID=************************
+export AWS_SECRET_ACCESS_KEY=************************
+export AWS_SESSION_TOKEN=************************
+```
+3) Initialize terraform
+```
+terraform init
+```
+4) Run a plan passing in your TFC account name and AWS region
+```
+terraform plan -var "tfc_organization=something" -var "region=aws_region"
+```
+5) Assuming everything looks good, run an apply passing in your TFC account name and AWS region 
+```
+terraform apply -var "tfc_organization=something" -var "region=aws_region"
+```
+
+## Preparing your TFC account:
+1) Create a new Project (I called mine "boundary-demo")
+2) Create a new Variable Set (again, I called mine "boundary-demo") and scope it to your previously created Project
+3) Populate the variable set with the following variables:
+
+| Key | Value | Sensitive? | Type |
+|-----|-------|------------|------|
+|aws_account_id|\<your AWS account ID\>|no|terraform|
+|boundary_username|\<intended boundary admin username\>|yes|terraform|
+|boundary_password|\<intended boundary admin password\>|yes|terraform|
+|my_email|\<your email\>|no|terraform|
+|region|\<the region which will be used on HCP and AWS\>|no|terraform|
+|stack_id|\<will be used to consistently name resources - 3-36 characters.  Can only contain letters, numbers and hyphens\>|no|terraform|
+|tfc_organization|\<your TFC account name\>|no|terraform|
+|HCP_CLIENT_ID|\<HCP Service Principal Client ID\>|no|env|
+|HCP_CLIENT_SECRET|\<HCP Service Principal Client Secret\>|yes|env|
+|TFC_WORKLOAD_IDENTITY_AUDIENCE|\<can be literally anything\>|no|env|
+|TFE_TOKEN|\<TFC User token\>|yes|env|
+|TFC_ORGANIZATION|\<your TFC account name\>|no|env|
+
+4) Create a new workspace within your TFC project called "0_control", attaching it to this VCS repository, specifying the working directory as "0_control"
+5) Create the following workspace variables within "0_control":
+
+| Key | Value | Sensitive? | Type |
+|-----|-------|------------|------|
+|oauth_token_id|\<the ot- ID of your OAuth connection\>|no|terraform|
+|repo_identifier|\<your GH org>/Simple_Boundary_Demo|no|terraform|
+|repo_branch|main|no|terraform|
+|tfc_project_id|\<the prj- ID of your TFC Project\>|no|terraform|
+
+
+
+
+
+
+
 ## Building Vault and Boundary clusters in HCP
 
 The "Plataforma" directory contains the code to build a Vault and Boundary cluster in HCP together with a VPC in your AWS account. That VPC gets connected to HCP (where Vault is deployed) by means of a VPC peering with an HVN. After deploying the infrastructure we set a number of environmental variables that are required for the upcoming deployments. Finally, we authenticate with Boundary using the credentials we have defined within the `terraform.tfvars` file. Vault cluster is configured to send logs to Datadog.
