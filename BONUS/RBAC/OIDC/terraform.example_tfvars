@@ -1,6 +1,0 @@
-username       = "admin"
-password       = "SuperSecret123!"
-auth0_username = "admin"
-auth0_name     = "admin"
-auth0_email    = "admin@boundaryproject.io"
-auth0_password = "Passw0rd123!"
