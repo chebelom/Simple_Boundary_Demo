@@ -50,6 +50,9 @@ variable "peering_id" {
   type        = string
   default     = "stacks-peering"
 }
+# variable "peer_vpc_id" {
+#   type = string
+# }
 
 variable "route_id" {
   description = "The ID of the HCP HVN route."
@@ -68,9 +71,9 @@ variable "boundary_username" {
   default = "admin"
 }
 
-variable "boundary_password" {
-  type = string
-}
+# variable "boundary_password" {
+#   type = string
+# }
 
 variable "vault_cluster_id" {
   description = "The ID of the HCP Vault cluster."

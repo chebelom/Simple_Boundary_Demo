@@ -10,6 +10,7 @@ output "boundary_public_url" {
   value = hcp_boundary_cluster.boundary.cluster_url
 }
 
-output "peering_id" {
-  value = hcp_aws_network_peering.peer.provider_peering_id
+output "vault_token" {
+  value = hcp_vault_cluster_admin_token.token.token
+  sensitive = true
 }

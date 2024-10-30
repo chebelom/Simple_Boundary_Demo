@@ -3,28 +3,28 @@ variable "region" {
   type        = string
 }
 
-variable "cloud_provider" {
-  description = "The cloud provider of the HCP HVN and Vault cluster."
-  type        = string
-}
+# variable "cloud_provider" {
+#   description = "The cloud provider of the HCP HVN and Vault cluster."
+#   type        = string
+# }
 
 variable "hvn_id" {
   description = "The ID of the HCP HVN."
   type        = string
 }
 
-variable "peering_id" {
-  description = "The ID of the HCP peering connection."
-  type        = string
-}
+# variable "peering_id" {
+#   description = "The ID of the HCP peering connection."
+#   type        = string
+# }
 
-variable "peer_vpc_id" {
-}
+# variable "peer_vpc_id" {
+# }
 
-variable "route_id" {
-  description = "The ID of the HCP HVN route."
-  type        = string
-}
+# variable "route_id" {
+#   description = "The ID of the HCP HVN route."
+#   type        = string
+# }
 
 variable "boundary_cluster_id" {
   description = "The ID of the HCP Boundary cluster."
@@ -35,9 +35,9 @@ variable "boundary_username" {
   type = string
 }
 
-variable "boundary_password" {
-  type = string
-}
+# variable "boundary_password" {
+#   type = string
+# }
 
 variable "vault_cluster_id" {
   description = "The ID of the HCP Vault cluster."
@@ -54,7 +54,7 @@ variable "boundary_tier" {
   type        = string
 }
 
-variable "cidr_block" {
-  type        = string
-  description = "VPC CIDR"
-}
+# variable "cidr_block" {
+#   type        = string
+#   description = "VPC CIDR"
+# }
