@@ -10,3 +10,4 @@ data.json
 token.txt
 *.log
 *.cast
+!.terraform-version
