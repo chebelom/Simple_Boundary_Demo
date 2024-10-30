@@ -18,6 +18,9 @@ variable "peering_id" {
   type        = string
 }
 
+variable "peer_vpc_id" {
+}
+
 variable "route_id" {
   description = "The ID of the HCP HVN route."
   type        = string
@@ -49,4 +52,9 @@ variable "vault_tier" {
 variable "boundary_tier" {
   description = "Tier of the HCP Boundary cluster. Valid options for tiers."
   type        = string
+}
+
+variable "cidr_block" {
+  type        = string
+  description = "VPC CIDR"
 }

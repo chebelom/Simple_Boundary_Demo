@@ -9,7 +9,6 @@ variable "aws_identity_token" {
     ephemeral = true
 }
 
-
 variable "hcp_project_id" {
     type = string
 }
@@ -34,7 +33,6 @@ variable "region" {
 }
 
 ## HCP VARS
-
 variable "cloud_provider" {
   description = "The cloud provider of the HCP HVN and Vault cluster."
   type        = string
