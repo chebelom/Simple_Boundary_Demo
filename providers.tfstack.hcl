@@ -29,10 +29,9 @@ provider "aws" "this" {
 
 provider "hcp" "this" {
   config {
-    project_id = var.hcp_project_id
     workload_identity {
-      resource_name = "iam/project/${var.hcp_project_id}/service-principal/${var.hcp_sp_name}/workload-identity-provider/${var.hcp_wif_name}"
-      token = var.hcp_identity_token
+      resource_name = var.hcp_workload_identity_provider
+      token         = var.hcp_token
     }
   }
 }
