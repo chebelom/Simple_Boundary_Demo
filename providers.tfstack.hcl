@@ -44,10 +44,10 @@ provider "vault" "this" {
   }
 }
 
-provider "boundary" "this" {
-  config {
-    addr = component.hcp_clusters.boundary_public_url
-    auth_method_login_name = var.boundary_username
-    auth_method_password = component.hcp_clusters.hcp_boundary_cluster_admin_password
-  }
-}
+# provider "boundary" "this" {
+#   config {
+#     addr = component.hcp_clusters.boundary_public_url
+#     auth_method_login_name = var.boundary_username
+#     auth_method_password = component.hcp_clusters.hcp_boundary_cluster_admin_password
+#   }
+# }
