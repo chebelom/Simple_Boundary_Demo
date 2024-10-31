@@ -11,3 +11,4 @@ token.txt
 *.log
 *.cast
 !.terraform-version
+!.terraform.lock.hcl
