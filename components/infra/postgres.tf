@@ -57,16 +57,16 @@ data "aws_ami" "ubuntu_ami" {
 # }
 
 
-data "aws_key_pair" "example" {
-  key_name           = var.key_pair_name
-  include_public_key = true
-}
+# data "aws_key_pair" "example" {
+#   key_name           = var.key_pair_name
+#   include_public_key = true
+# }
 
 resource "aws_instance" "postgres_target" {
   #count                  = 1
   ami                    = data.aws_ami.ubuntu_ami.id
   instance_type          = "t2.micro"
-  key_name               = data.aws_key_pair.example.key_name
+  key_name               = aws_key_pair.ec2_key.key_name
   # vpc_security_group_ids = [aws_security_group.public_network_ssh_postgres.id]
   vpc_security_group_ids = [var.private_sg]
   # subnet_id              = data.aws_subnet.example_subnet.id
@@ -76,7 +76,7 @@ resource "aws_instance" "postgres_target" {
   user_data_base64            = data.cloudinit_config.postgres.rendered
 
   tags = {
-    Name = "Postgres Boundary Target"
+    Name = "Stacks - Postgres Boundary Target"
   }
 }
 
