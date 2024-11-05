@@ -21,7 +21,7 @@ resource "aws_instance" "windows-server" {
   vpc_security_group_ids = [var.private_sg]
 
   source_dest_check = false
-  key_name          = data.aws_key_pair.example.key_name
+  key_name          = aws_key_pair.ec2_key.key_name
   get_password_data = true
   user_data         = <<EOF
     <powershell>
