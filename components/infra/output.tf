@@ -9,7 +9,7 @@ output "win_password_data" {
 }
 
 output "postgres_private_ip" {
-  value = aws_instance.postgres_target.private_dns
+  value = aws_instance.postgres_target.private_ip
 }
 
 # output "downstreamWorker_publicIP" {
