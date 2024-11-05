@@ -67,9 +67,7 @@ resource "aws_instance" "postgres_target" {
   ami                    = data.aws_ami.ubuntu_ami.id
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.ec2_key.key_name
-  # vpc_security_group_ids = [aws_security_group.public_network_ssh_postgres.id]
   vpc_security_group_ids = [var.private_sg]
-  # subnet_id              = data.aws_subnet.example_subnet.id
   subnet_id               = var.private_subnet1
 
   user_data_replace_on_change = true
