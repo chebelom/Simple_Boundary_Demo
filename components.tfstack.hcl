@@ -53,5 +53,17 @@ component "infra" {
     private_sg = component.networking.private_sg
     private_subnet1 = component.networking.private_subnet1
   }
+}
 
+component "vault-config" {
+  source = "./components/vault-config"
+  providers = {
+    # aws = provider.aws.this
+    vault = provider.vault.this
+  }
+  inputs = {
+    ssh_key_private = component.infra.ssh_key_private
+    win_password_data = component.infra.win_password_data
+    postgres_private_ip = component.infra.postgres_private_ip
+  }
 }

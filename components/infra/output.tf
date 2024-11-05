@@ -1,3 +1,16 @@
+output "ssh_key_private" {
+value = tls_private_key.rsa_4096_key.private_key_pem
+}
+
+output "win_password_data" {
+  value = aws_instance.windows-server.password_data
+  sensitive = true
+}
+
+output "postgres_private_ip" {
+  value = aws_instance.postgres_target.private_ip
+}
+
 # output "downstreamWorker_publicIP" {
 #   value = aws_instance.boundary_downstream_worker.public_ip
 # }
