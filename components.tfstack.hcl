@@ -38,3 +38,20 @@ component "hcp_clusters" {
     vault_cluster_id = var.vault_cluster_id
   }
 }
+component "infra" {
+  source = "./components/infra"
+  providers = {
+    aws = provider.aws.this
+    tls = provider.tls.this
+    time = provider.time.this
+    cloudinit = provider.cloudinit.this
+  }
+  inputs = {
+    region = var.region
+    boundary_username = var.boundary_username
+    boundary_cluster_id = var.boundary_cluster_id
+    private_sg = component.networking.private_sg
+    private_subnet1 = component.networking.private_subnet1
+  }
+
+}

@@ -9,3 +9,11 @@ output "vpc_peer_owner_id" {
 output "hvn_id" {
   value = hcp_hvn.hvn.hvn_id
 }
+
+output "private_sg" {
+  value = aws_security_group.privatesg.id
+}
+
+output "private_subnet1" {
+  value = aws_subnet.public1.id
+}
