@@ -135,7 +135,7 @@ resource "aws_security_group" "privatesg" {
     to_port     = 5432
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] #, aws_subnet.public1.cidr_block]
-    security_groups = [ aws_subnet.public1.id ]
+    # security_groups = [ aws_subnet.public1.id ]
   }
 
   ingress {
