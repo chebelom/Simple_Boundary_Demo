@@ -121,7 +121,7 @@ resource "aws_security_group" "privatesg" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["172.25.16.0/20"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
