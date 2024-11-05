@@ -15,5 +15,5 @@ output "private_sg" {
 }
 
 output "private_subnet1" {
-  value = aws_subnet.public1.id
+  value = aws_subnet.private1.id
 }

@@ -79,7 +79,7 @@ resource "aws_route_table_association" "route2" {
 
 # Deploy Security Groups
 resource "aws_security_group" "publicsg" {
-  name        = "Stacks Downstream Worker"
+  name        = "Stacks Public SecGroup"
   description = "SSH + Boundary port"
   vpc_id      = aws_vpc.peer.id
 
@@ -116,14 +116,12 @@ resource "aws_security_group" "privatesg" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    #cidr_blocks = ["${data.http.current.response_body}/32"]
   }
   ingress {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    #cidr_blocks = ["${data.http.current.response_body}/32"]
+    cidr_blocks = ["172.25.16.0/20"]
   }
 
   ingress {
@@ -131,7 +129,6 @@ resource "aws_security_group" "privatesg" {
     to_port     = 3389
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-    #cidr_blocks = ["${data.http.current.response_body}/32"]
   }
 
   ingress {
@@ -150,32 +147,32 @@ resource "aws_security_group" "privatesg" {
   }
 }
 
-resource "aws_security_group" "allow_vault_egress_ingress" {
-  name        = "allow_vault_egress_ingress"
-  description = "Allow Vault outbound traffic and some ingress"
-  vpc_id      = aws_vpc.peer.id
+# resource "aws_security_group" "allow_vault_egress_ingress" {
+#   name        = "allow_vault_egress_ingress"
+#   description = "Allow Vault outbound traffic and some ingress"
+#   vpc_id      = aws_vpc.peer.id
 
-  egress {
-    from_port   = 8200
-    to_port     = 8200
-    protocol    = "tcp"
-    cidr_blocks = ["172.25.16.0/20"]
-  }
-  # Allow connection to postgres from Vault
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["172.25.16.0/20"]
-  }
-  # Allow LDAP from Vault to VPC
-  ingress {
-    from_port   = 389
-    to_port     = 389
-    protocol    = "tcp"
-    cidr_blocks = ["172.25.16.0/20"]
-  }
-}
+#   egress {
+#     from_port   = 8200
+#     to_port     = 8200
+#     protocol    = "tcp"
+#     cidr_blocks = ["172.25.16.0/20"]
+#   }
+#   # Allow connection to postgres from Vault
+#   ingress {
+#     from_port   = 5432
+#     to_port     = 5432
+#     protocol    = "tcp"
+#     cidr_blocks = ["172.25.16.0/20"]
+#   }
+#   # Allow LDAP from Vault to VPC
+#   ingress {
+#     from_port   = 389
+#     to_port     = 389
+#     protocol    = "tcp"
+#     cidr_blocks = ["172.25.16.0/20"]
+#   }
+# }
 
 
 # # data "aws_internet_gateway" "default" {
