@@ -11,7 +11,7 @@ resource "aws_internet_gateway" "ig" {
 # Deploy 2 Public Subnets
 resource "aws_subnet" "public1" {
   vpc_id                  = aws_vpc.peer.id
-  cidr_block              = "10.1.1.0/24"
+  cidr_block              = "172.31.10.0/24"
   availability_zone       = "${var.region}a"
   map_public_ip_on_launch = true
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "public1" {
 
 resource "aws_subnet" "public2" {
   vpc_id                  = aws_vpc.peer.id
-  cidr_block              = "10.1.2.0/24"
+  cidr_block              = "172.31.11.0/24"
   availability_zone       = "${var.region}b"
   map_public_ip_on_launch = true
 
@@ -34,7 +34,7 @@ resource "aws_subnet" "public2" {
 # Deploy 2 Private Subnets
 resource "aws_subnet" "private1" {
   vpc_id                  = aws_vpc.peer.id
-  cidr_block              = "10.1.3.0/24"
+  cidr_block              = "172.31.12.0/24"
   availability_zone       = "${var.region}a"
   map_public_ip_on_launch = false
 
@@ -45,7 +45,7 @@ resource "aws_subnet" "private1" {
 
 resource "aws_subnet" "private2" {
   vpc_id                  = aws_vpc.peer.id
-  cidr_block              = "10.1.4.0/24"
+  cidr_block              = "172.31.13.0/24"
   availability_zone       = "${var.region}b"
   map_public_ip_on_launch = false
 
