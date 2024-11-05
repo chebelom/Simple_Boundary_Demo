@@ -77,6 +77,11 @@ resource "aws_route_table_association" "route2" {
   route_table_id = aws_route_table.rt.id
 }
 
+resource "aws_route_table_association" "private_route1" {
+  subnet_id      = aws_subnet.private1.id
+  route_table_id = aws_vpc.peer.main_route_table_id
+}
+
 # Deploy Security Groups
 resource "aws_security_group" "publicsg" {
   name        = "Stacks Public SecGroup"
@@ -96,6 +101,7 @@ resource "aws_security_group" "publicsg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
   egress {
     from_port   = 0
     to_port     = 0
@@ -128,7 +134,8 @@ resource "aws_security_group" "privatesg" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0", aws_subnet.public1.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"] #, aws_subnet.public1.cidr_block]
+    security_groups = [ aws_subnet.public1.id ]
   }
 
   ingress {
