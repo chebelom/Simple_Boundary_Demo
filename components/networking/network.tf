@@ -79,7 +79,7 @@ resource "aws_route_table_association" "route2" {
 
 resource "aws_route_table_association" "private_route1" {
   subnet_id      = aws_subnet.private1.id
-  route_table_id = aws_vpc.peer.main_route_table_id
+  route_table_id = aws_route_table.rt.id
 }
 
 # Deploy Security Groups
