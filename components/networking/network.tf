@@ -107,8 +107,14 @@ resource "aws_security_group" "publicsg" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-
   }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["172.25.16.0/20"]
+  }
+
 }
 
 resource "aws_security_group" "privatesg" {
@@ -134,8 +140,8 @@ resource "aws_security_group" "privatesg" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0", "172.25.16.0/20"] #, aws_subnet.public1.cidr_block]
-    security_groups = [ aws_security_group.publicsg.id ]
+    cidr_blocks = ["0.0.0.0/0"] #, "172.25.16.0/20"] #, aws_subnet.public1.cidr_block]
+    # security_groups = [ aws_security_group.publicsg.id ]
   }
 
   ingress {
