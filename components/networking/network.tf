@@ -1,7 +1,7 @@
 
 # Deploy Internet Gateway
 resource "aws_internet_gateway" "ig" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.peer.id
 
   tags = {
     Name = "Stacks-igw"
@@ -10,7 +10,7 @@ resource "aws_internet_gateway" "ig" {
 
 # Deploy 2 Public Subnets
 resource "aws_subnet" "public1" {
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.peer.id
   cidr_block              = "10.1.1.0/24"
   availability_zone       = "${var.region}a"
   map_public_ip_on_launch = true
@@ -21,7 +21,7 @@ resource "aws_subnet" "public1" {
 }
 
 resource "aws_subnet" "public2" {
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.peer.id
   cidr_block              = "10.1.2.0/24"
   availability_zone       = "${var.region}b"
   map_public_ip_on_launch = true
@@ -33,7 +33,7 @@ resource "aws_subnet" "public2" {
 
 # Deploy 2 Private Subnets
 resource "aws_subnet" "private1" {
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.peer.id
   cidr_block              = "10.1.3.0/24"
   availability_zone       = "${var.region}a"
   map_public_ip_on_launch = false
@@ -44,7 +44,7 @@ resource "aws_subnet" "private1" {
 }
 
 resource "aws_subnet" "private2" {
-  vpc_id                  = aws_vpc.vpc.id
+  vpc_id                  = aws_vpc.peer.id
   cidr_block              = "10.1.4.0/24"
   availability_zone       = "${var.region}b"
   map_public_ip_on_launch = false
@@ -55,7 +55,7 @@ resource "aws_subnet" "private2" {
 }
 # Deploy Route Table
 resource "aws_route_table" "rt" {
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.peer.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -81,7 +81,7 @@ resource "aws_route_table_association" "route2" {
 resource "aws_security_group" "publicsg" {
   name        = "Stacks Downstream Worker"
   description = "SSH + Boundary port"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.peer.id
 
   ingress {
     from_port   = 22
@@ -101,7 +101,7 @@ resource "aws_security_group" "publicsg" {
 resource "aws_security_group" "privatesg" {
   name        = "Stacks Privatesg"
   description = "Allow traffic"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = aws_vpc.peer.id
 
   ingress {
     from_port       = 3306
