@@ -103,17 +103,24 @@ resource "aws_security_group" "privatesg" {
   description = "Allow traffic"
   vpc_id      = aws_vpc.peer.id
 
-  ingress {
-    from_port       = 3306
-    to_port         = 3306
-    protocol        = "tcp"
-    cidr_blocks     = ["10.1.0.0/16"]
-    security_groups = [aws_security_group.publicsg.id]
-  }
+  # ingress {
+  #   from_port       = 3306
+  #   to_port         = 3306
+  #   protocol        = "tcp"
+  #   cidr_blocks     = ["10.1.0.0/16"]
+  #   security_groups = [aws_security_group.publicsg.id]
+  # }
 
   ingress {
     from_port   = 80
     to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    #cidr_blocks = ["${data.http.current.response_body}/32"]
+  }
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     #cidr_blocks = ["${data.http.current.response_body}/32"]
