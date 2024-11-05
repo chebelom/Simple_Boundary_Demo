@@ -77,10 +77,10 @@ resource "aws_route_table_association" "route2" {
   route_table_id = aws_route_table.rt.id
 }
 
-resource "aws_route_table_association" "private_route1" {
-  subnet_id      = aws_subnet.private1.id
-  route_table_id = aws_route_table.rt.id
-}
+# resource "aws_route_table_association" "private_route1" {
+#   subnet_id      = aws_subnet.private1.id
+#   route_table_id = aws_route_table.rt.id
+# }
 
 # Deploy Security Groups
 resource "aws_security_group" "publicsg" {
@@ -135,7 +135,7 @@ resource "aws_security_group" "privatesg" {
     to_port     = 5432
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] #, aws_subnet.public1.cidr_block]
-    # security_groups = [ aws_subnet.public1.id ]
+    security_groups = [ aws_security_group.publicsg.id ]
   }
 
   ingress {
