@@ -15,8 +15,6 @@ deployment "demo" {
 
     hcp_token                      = identity_token.hcp.jwt
     hcp_workload_identity_provider = "iam/project/217c5d98-68ae-4475-8b60-5457e2cbad29/service-principal/stacks-andreadetassis/workload-identity-provider/stacks-andreadetassis"
-
   }
 }
 
-#iam/project/217c5d98-68ae-4475-8b60-5457e2cbad29/service-principal/stacks-andreadetassis/workload-identity-provider/stacks-andreadetassis
