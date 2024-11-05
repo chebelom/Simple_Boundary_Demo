@@ -134,7 +134,7 @@ resource "aws_security_group" "privatesg" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] #, aws_subnet.public1.cidr_block]
+    cidr_blocks = ["0.0.0.0/0", "172.25.16.0/20"] #, aws_subnet.public1.cidr_block]
     security_groups = [ aws_security_group.publicsg.id ]
   }
 
