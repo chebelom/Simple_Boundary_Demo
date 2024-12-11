@@ -66,7 +66,7 @@ resource "aws_route_table" "rt" {
   }
 }
 
-# Associate Subnets With Route Table
+# Associate Subnets With Route Table Public
 resource "aws_route_table_association" "route1" {
   subnet_id      = aws_subnet.public1.id
   route_table_id = aws_route_table.rt.id
@@ -76,6 +76,31 @@ resource "aws_route_table_association" "route2" {
   subnet_id      = aws_subnet.public2.id
   route_table_id = aws_route_table.rt.id
 }
+
+
+# Create a Route Table for Private Subnet (No internet access)
+resource "aws_route_table" "private_route_table" {
+  vpc_id = aws_vpc.peer.id
+}
+
+# No default route for internet traffic in the private subnet
+resource "aws_route_table_association" "private1_route_association" {
+  subnet_id      = aws_subnet.private1.id
+  route_table_id = aws_route_table.private_route_table.id
+}
+
+resource "aws_route_table_association" "private2_route_association" {
+  subnet_id      = aws_subnet.private2.id
+  route_table_id = aws_route_table.private_route_table.id
+}
+
+# Add routes in the private subnet route table to reach HCP VPC via Peering
+resource "aws_route" "route_to_hcp_vault1" {
+  route_table_id         = aws_route_table.private_route_table.id
+  destination_cidr_block = var.hvn_cidr_block  
+  vpc_peering_connection_id = hcp_aws_network_peering.peer.provider_peering_id
+}
+
 
 # resource "aws_route_table_association" "private_route1" {
 #   subnet_id      = aws_subnet.private1.id
