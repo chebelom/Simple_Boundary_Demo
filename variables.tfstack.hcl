@@ -1,12 +1,12 @@
 ## AUTH VARS
 
 variable "aws_role_arn" {
-    type = string
+  type = string
 }
 
 variable "aws_identity_token" {
-    type      = string
-    ephemeral = true
+  type      = string
+  ephemeral = true
 }
 
 # variable "hcp_project_id" {
@@ -22,8 +22,8 @@ variable "aws_identity_token" {
 # }
 
 variable "hcp_token" {
-    type      = string
-    ephemeral = true
+  type      = string
+  ephemeral = true
 }
 
 variable "hcp_workload_identity_provider" {
@@ -33,7 +33,7 @@ variable "hcp_workload_identity_provider" {
 variable "region" {
   description = "The region of the HCP HVN and Vault cluster."
   type        = string
-  default = "eu-west-1"
+  default     = "eu-west-1"
 }
 
 ## HCP VARS
@@ -71,7 +71,7 @@ variable "boundary_cluster_id" {
 }
 
 variable "boundary_username" {
-  type = string
+  type    = string
   default = "admin"
 }
 

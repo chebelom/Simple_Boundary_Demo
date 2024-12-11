@@ -1,32 +1,32 @@
 required_providers {
-    aws = {
-        source  = "hashicorp/aws"
-        version = "~> 5.70.0"
-    }
-    hcp = {
-        source  = "hashicorp/hcp"
-        version = "~> 0.97.0"
-    }
-    vault = {
-      source = "hashicorp/vault"
-      version = "~> 4.4.0"
-    }
-    boundary = {
-      source = "hashicorp/boundary"
-      version = "~> 1.1.15"
-    }
-    time = {
-      source  = "hashicorp/time"
-      version = "0.12.1"
-    }
-    tls = {
-      source  = "hashicorp/tls"
-      version = "4.0.6"
-    }
-    cloudinit = {
-      source  = "hashicorp/cloudinit"
-      version = "2.3.5"
-    }
+  aws = {
+    source  = "hashicorp/aws"
+    version = "~> 5.80.0"
+  }
+  hcp = {
+    source  = "hashicorp/hcp"
+    version = "~> 0.100.0"
+  }
+  vault = {
+    source  = "hashicorp/vault"
+    version = "~> 4.5.0"
+  }
+  boundary = {
+    source  = "hashicorp/boundary"
+    version = "~> 1.2.0"
+  }
+  time = {
+    source  = "hashicorp/time"
+    version = "0.12.1"
+  }
+  tls = {
+    source  = "hashicorp/tls"
+    version = "4.0.6"
+  }
+  cloudinit = {
+    source  = "hashicorp/cloudinit"
+    version = "2.3.5"
+  }
 
 }
 
@@ -34,7 +34,7 @@ provider "aws" "this" {
   config {
     region = var.region
     assume_role_with_web_identity {
-      role_arn = var.aws_role_arn
+      role_arn           = var.aws_role_arn
       web_identity_token = var.aws_identity_token
     }
   }
@@ -51,8 +51,8 @@ provider "hcp" "this" {
 
 provider "vault" "this" {
   config {
-    address = component.hcp_clusters.vault_public_url
-    token = component.hcp_clusters.vault_token
+    address   = component.hcp_clusters.vault_public_url
+    token     = component.hcp_clusters.vault_token
     namespace = "admin"
   }
 }
