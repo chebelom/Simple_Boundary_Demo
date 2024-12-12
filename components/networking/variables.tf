@@ -34,5 +34,5 @@ variable "region" {
 variable "hvn_cidr_block" {
   type        = string
   description = "The CIDR range to create the HCP HVN with"
-  default     = "172.25.32.0/20"
+  default     = "172.25.16.0/20"
 }
