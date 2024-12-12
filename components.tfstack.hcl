@@ -51,7 +51,8 @@ component "infra" {
     boundary_username   = var.boundary_username
     boundary_cluster_id = var.boundary_cluster_id
     private_sg          = component.networking.private_sg
-    private_subnet1     = component.networking.private_subnet1
+    # private_subnet1     = component.networking.private_subnet1
+    private_subnet1     = component.networking.public_subnet1
   }
 }
 
