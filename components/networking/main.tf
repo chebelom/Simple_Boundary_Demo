@@ -62,7 +62,6 @@ resource "hcp_hvn_route" "peer_route" {
 
 
 resource "aws_vpc_peering_connection_accepter" "peer" {
-  # vpc_peering_connection_id = var.peering_id
   vpc_peering_connection_id = hcp_aws_network_peering.peer.provider_peering_id
   auto_accept               = true
 }

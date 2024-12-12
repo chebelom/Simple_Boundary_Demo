@@ -133,17 +133,17 @@ resource "aws_security_group" "publicsg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["172.25.16.0/20"]
-  }
+  # ingress {
+  #   from_port   = 0
+  #   to_port     = 0
+  #   protocol    = "-1"
+  #   cidr_blocks = [var.hvn_cidr_block]
+  # }
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["172.25.16.0/20"]
+    cidr_blocks = [var.hvn_cidr_block]
   }
 
 }
@@ -153,13 +153,6 @@ resource "aws_security_group" "privatesg" {
   description = "Allow traffic"
   vpc_id      = aws_vpc.peer.id
 
-  # ingress {
-  #   from_port       = 3306
-  #   to_port         = 3306
-  #   protocol        = "tcp"
-  #   cidr_blocks     = ["10.1.0.0/16"]
-  #   security_groups = [aws_security_group.publicsg.id]
-  # }
 
   ingress {
     from_port   = 80
@@ -171,8 +164,7 @@ resource "aws_security_group" "privatesg" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] #, "172.25.16.0/20"] #, aws_subnet.public1.cidr_block]
-    # security_groups = [ aws_security_group.publicsg.id ]
+    cidr_blocks = ["0.0.0.0/0", var.hvn_cidr_block] 
   }
 
   ingress {
@@ -192,14 +184,19 @@ resource "aws_security_group" "privatesg" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = ["172.25.16.0/20"]
+    cidr_blocks = [var.hvn_cidr_block]
   }
   egress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
-
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [var.hvn_cidr_block]
   }
 }
 
