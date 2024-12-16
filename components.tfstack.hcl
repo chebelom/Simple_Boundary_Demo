@@ -30,32 +30,32 @@ component "hcp_clusters" {
     vault_cluster_id = var.vault_cluster_id
   }
 }
-# component "infra" {
-#   source = "./components/infra"
-#   providers = {
-#     aws       = provider.aws.this
-#     tls       = provider.tls.this
-#     time      = provider.time.this
-#     cloudinit = provider.cloudinit.this
-#   }
-#   inputs = {
-#     region              = var.region
-#     boundary_username   = var.boundary_username
-#     boundary_cluster_id = var.boundary_cluster_id
-#     private_sg          = component.networking.private_sg
-#     private_subnet1     = component.networking.private_subnet1
-#   }
-# }
+component "infra" {
+  source = "./components/infra"
+  providers = {
+    aws       = provider.aws.this
+    tls       = provider.tls.this
+    time      = provider.time.this
+    cloudinit = provider.cloudinit.this
+  }
+  inputs = {
+    region              = var.region
+    boundary_username   = var.boundary_username
+    boundary_cluster_id = var.boundary_cluster_id
+    private_sg          = component.networking.private_sg
+    private_subnet1     = component.networking.private_subnet1
+  }
+}
 
-# component "vault-config" {
-#   source = "./components/vault-config"
-#   providers = {
-#     # aws = provider.aws.this
-#     vault = provider.vault.this
-#   }
-#   inputs = {
-#     ssh_key_private     = component.infra.ssh_key_private
-#     win_password_data   = component.infra.win_password_data
-#     postgres_private_ip = component.infra.postgres_private_ip
-#   }
-# }
+component "vault-config" {
+  source = "./components/vault-config"
+  providers = {
+    # aws = provider.aws.this
+    vault = provider.vault.this
+  }
+  inputs = {
+    ssh_key_private     = component.infra.ssh_key_private
+    win_password_data   = component.infra.win_password_data
+    postgres_private_ip = component.infra.postgres_private_ip
+  }
+}
