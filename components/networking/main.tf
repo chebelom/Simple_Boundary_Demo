@@ -43,7 +43,7 @@ resource "aws_vpc_peering_connection_accepter" "peer" {
 resource "aws_security_group" "allow_vault_egress" {
   name        = "allow_vault_egress"
   description = "Allow Vault outbound traffic"
-  vpc_id      = aws_vpc.peer
+  vpc_id      = aws_vpc.peer.id
 
   egress {
     from_port        = 8200
