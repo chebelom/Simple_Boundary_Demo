@@ -75,6 +75,7 @@ resource "aws_subnet" "private2" {
     Name = "Stacks-2private"
   }
 }
+
 # Deploy Route Table
 resource "aws_route_table" "rt" {
   vpc_id = aws_vpc.peer.id
@@ -83,12 +84,19 @@ resource "aws_route_table" "rt" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.ig.id
   }
+
+  # Route traffic to the HVN peering connection
+  route {
+    cidr_block                = var.hvn_cidr_block
+    vpc_peering_connection_id = hcp_aws_network_peering.peer.provider_peering_id
+  }
+
   tags = {
-    Name = "Stacks-routetable"
+    Name = "stacks-route-table-self-hvn"
   }
 }
 
-# Associate Subnets With Route Table Public
+# Associate Subnets With Route Table
 resource "aws_route_table_association" "route1" {
   subnet_id      = aws_subnet.public1.id
   route_table_id = aws_route_table.rt.id
