@@ -12,32 +12,6 @@ data "aws_arn" "peer" {
   arn = aws_vpc.peer.arn
 }
 
-resource "aws_security_group" "allow_vault_egress_ingress" {
-  name        = "allow_vault_egress_ingress"
-  description = "Allow Vault outbound traffic and some ingress"
-  vpc_id      = aws_vpc.peer.id
-
-  egress {
-    from_port   = 8200
-    to_port     = 8200
-    protocol    = "tcp"
-    cidr_blocks = [var.hvn_cidr_block]
-  }
-  # Allow connection to postgres from Vault
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = [var.hvn_cidr_block]
-  }
-  # Allow LDAP from Vault to VPC
-  ingress {
-    from_port   = 389
-    to_port     = 389
-    protocol    = "tcp"
-    cidr_blocks = [var.hvn_cidr_block]
-  }
-}
 
 resource "hcp_hvn" "hvn" {
   hvn_id         = var.hvn_id
@@ -64,4 +38,17 @@ resource "hcp_hvn_route" "peer_route" {
 resource "aws_vpc_peering_connection_accepter" "peer" {
   vpc_peering_connection_id = hcp_aws_network_peering.peer.provider_peering_id
   auto_accept               = true
+}
+
+resource "aws_security_group" "allow_vault_egress" {
+  name        = "allow_vault_egress"
+  description = "Allow Vault outbound traffic"
+  vpc_id      = aws_vpc.peer
+
+  egress {
+    from_port        = 8200
+    to_port          = 8200
+    protocol         = "tcp"
+    cidr_blocks      = [var.hvn_cidr_block]
+  }
 }
