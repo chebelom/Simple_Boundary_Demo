@@ -8,6 +8,28 @@ resource "aws_internet_gateway" "ig" {
   }
 }
 
+# Create an Elastic IP for the NAT Gateway
+resource "aws_eip" "nat_eip_1" {
+  domain = "vpc"
+}
+
+resource "aws_eip" "nat_eip_2" {
+  domain = "vpc"
+}
+
+# Create NAT Gateways in Public Subnets (One per AZ)
+resource "aws_nat_gateway" "nat_gateway_a" {
+  allocation_id = aws_eip.nat_eip_1.id
+  subnet_id     = aws_subnet.public1.id
+  depends_on    = [aws_eip.nat_eip_1]
+}
+
+resource "aws_nat_gateway" "nat_gateway_b" {
+  allocation_id = aws_eip.nat_eip_2.id
+  subnet_id     = aws_subnet.public2
+  depends_on    = [aws_eip.nat_eip_2]
+}
+
 # Deploy 2 Public Subnets
 resource "aws_subnet" "public1" {
   vpc_id                  = aws_vpc.peer.id
@@ -79,28 +101,51 @@ resource "aws_route_table_association" "route2" {
 
 
 # Create a Route Table for Private Subnet (No internet access)
-resource "aws_route_table" "private_route_table" {
+resource "aws_route_table" "private_route_table1" {
   vpc_id = aws_vpc.peer.id
 }
+
+resource "aws_route_table" "private_route_table2" {
+  vpc_id = aws_vpc.peer.id
+}
+
+# Route for Private Subnet A and B to Use NAT Gateway A and B (for Internet Access)
+resource "aws_route" "private_subnet_nat_route_1" {
+  route_table_id         = aws_route_table.private_route_table1.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.nat_gateway_a.id
+}
+
+resource "aws_route" "private_subnet_nat_route_2" {
+  route_table_id         = aws_route_table.private_route_table2.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.nat_gateway_b.id
+}
+
 
 # No default route for internet traffic in the private subnet
 resource "aws_route_table_association" "private1_route_association" {
   subnet_id      = aws_subnet.private1.id
-  route_table_id = aws_route_table.private_route_table.id
+  route_table_id = aws_route_table.private_route_table1.id
 }
 
 resource "aws_route_table_association" "private2_route_association" {
   subnet_id      = aws_subnet.private2.id
-  route_table_id = aws_route_table.private_route_table.id
+  route_table_id = aws_route_table.private_route_table2.id
 }
 
 # Add routes in the private subnet route table to reach HCP VPC via Peering
 resource "aws_route" "route_to_hcp_vault1" {
-  route_table_id         = aws_route_table.private_route_table.id
+  route_table_id         = aws_route_table.private_route_table1.id
   destination_cidr_block = var.hvn_cidr_block  
   vpc_peering_connection_id = hcp_aws_network_peering.peer.provider_peering_id
 }
 
+resource "aws_route" "route_to_hcp_vault2" {
+  route_table_id         = aws_route_table.private_route_table2.id
+  destination_cidr_block = var.hvn_cidr_block  
+  vpc_peering_connection_id = hcp_aws_network_peering.peer.provider_peering_id
+}
 
 # resource "aws_route_table_association" "private_route1" {
 #   subnet_id      = aws_subnet.private1.id
