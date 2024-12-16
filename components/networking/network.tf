@@ -26,7 +26,7 @@ resource "aws_nat_gateway" "nat_gateway_a" {
 
 resource "aws_nat_gateway" "nat_gateway_b" {
   allocation_id = aws_eip.nat_eip_2.id
-  subnet_id     = aws_subnet.public2
+  subnet_id     = aws_subnet.public2.id
   depends_on    = [aws_eip.nat_eip_2]
 }
 
