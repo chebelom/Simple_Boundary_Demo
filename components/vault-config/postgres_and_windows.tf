@@ -102,7 +102,6 @@ resource "vault_kv_secret_v2" "windows_secret" {
       "data" : {
         "username" : "Administrator",
         "password" : rsadecrypt(var.win_password_data, var.ssh_key_private)
-        # "password" : rsadecrypt(aws_instance.windows-server.password_data, data.tfe_outputs.first-target-2.values.ssh-key-private)
       }
     }
   )
