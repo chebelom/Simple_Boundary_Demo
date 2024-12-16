@@ -60,7 +60,7 @@ component "vault-config" {
   }
 }
 
-component "buondary" {
+component "boundary" {
   source = "./components/configs-boundary"
     providers = {
     boundary = provider.boundary.this
