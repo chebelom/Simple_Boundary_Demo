@@ -116,6 +116,18 @@ resource "aws_route" "private_subnet_nat_route_1" {
   nat_gateway_id         = aws_nat_gateway.nat_gateway_a.id
 }
 
+resource "aws_route" "private_to_vault1" {
+  route_table_id         = aws_route_table.private_route_table1.id
+  destination_cidr_block = var.hvn_cidr_block  # HCP Vault VPC CIDR block
+  vpc_peering_connection_id = hcp_aws_network_peering.peer.provider_peering_id
+}
+
+resource "aws_route" "private_to_vault2" {
+  route_table_id         = aws_route_table.private_route_table2.id
+  destination_cidr_block = var.hvn_cidr_block  # HCP Vault VPC CIDR block
+  vpc_peering_connection_id = hcp_aws_network_peering.peer.provider_peering_id
+}
+
 resource "aws_route" "private_subnet_nat_route_2" {
   route_table_id         = aws_route_table.private_route_table2.id
   destination_cidr_block = "0.0.0.0/0"
