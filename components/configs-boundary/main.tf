@@ -24,4 +24,5 @@ resource "boundary_credential_store_vault" "vault" {
   token       = hcp_vault_cluster_admin_token.token.token
   scope_id    = boundary_scope.project.id
   namespace   = "admin"
+  depends_on = [ hcp_vault_cluster_admin_token.token ]
 }
