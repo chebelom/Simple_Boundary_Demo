@@ -59,17 +59,18 @@ component "vault-config" {
   }
 }
 
-component "boundary" {
+removed  {
   source = "./components/configs-boundary"
+  from = component.boundary
     providers = {
       boundary = provider.boundary.this
       hcp = provider.hcp.this
   }
-  inputs = {
-    boundary_address = component.hcp_clusters.boundary_public_url
-    boundary_vault_token = component.vault-config.boundary_vault_token
-    postgres_private_ip = component.infra.postgres_private_ip
-    vault_address = component.hcp_clusters.vault_public_url
-    vault_cluster_id = var.vault_cluster_id
-  }
+  # inputs = {
+  #   boundary_address = component.hcp_clusters.boundary_public_url
+  #   boundary_vault_token = component.vault-config.boundary_vault_token
+  #   postgres_private_ip = component.infra.postgres_private_ip
+  #   vault_address = component.hcp_clusters.vault_public_url
+  #   vault_cluster_id = var.vault_cluster_id
+  # }
 }
