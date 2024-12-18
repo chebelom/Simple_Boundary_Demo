@@ -63,7 +63,6 @@ component "boundary" {
   source = "./components/configs-boundary"
     providers = {
       boundary = provider.boundary.this
-      hcp = provider.hcp.this
   }
   inputs = {
     boundary_address = component.hcp_clusters.boundary_public_url
