@@ -62,11 +62,13 @@ component "vault-config" {
 component "boundary" {
   source = "./components/configs-boundary"
     providers = {
-    boundary = provider.boundary.this
+      boundary = provider.boundary.this
+      hcp = provider.hcp.this
   }
   inputs = {
     boundary_address = component.hcp_clusters.boundary_public_url
     boundary_vault_token = component.vault-config.boundary_vault_token
     postgres_private_ip = component.infra.postgres_private_ip
+    vault_cluster_id = component.hcp_clusters.vault_public_url
   }
 }
