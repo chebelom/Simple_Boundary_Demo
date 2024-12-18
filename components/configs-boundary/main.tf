@@ -5,7 +5,6 @@ resource "boundary_scope" "org" {
   auto_create_admin_role   = true
 }
 
-
 resource "boundary_scope" "project" {
   name                     = "My Demo project"
   description              = "Manage DB Prod Resources"

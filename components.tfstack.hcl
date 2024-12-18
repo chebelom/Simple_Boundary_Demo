@@ -50,7 +50,6 @@ component "infra" {
 component "vault-config" {
   source = "./components/vault-config"
   providers = {
-    # aws = provider.aws.this
     vault = provider.vault.this
   }
   inputs = {

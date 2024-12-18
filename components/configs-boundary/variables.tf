@@ -6,6 +6,7 @@ variable "boundary_vault_token" {
     type = string
     sensitive = true  
 }
+
 variable "postgres_private_ip" {
     type = string
 }
