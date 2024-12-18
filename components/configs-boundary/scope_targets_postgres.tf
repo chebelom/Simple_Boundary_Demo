@@ -1,29 +1,3 @@
-data "boundary_scope" "org" {
-  name     = "Demo"
-  scope_id = "global"
-}
-
-/* Create a project scope within the "ops-org" organsation
-Each org can contain multiple projects and projects are used to hold
-infrastructure-related resources
-*/
-resource "boundary_scope" "project" {
-  name                     = "Database"
-  description              = "Manage DB Prod Resources"
-  scope_id                 = data.boundary_scope.org.id
-  auto_create_admin_role   = true
-  auto_create_default_role = true
-}
-
-resource "boundary_credential_store_vault" "vault" {
-  name        = "vault"
-  description = "My  Vault credential store!"
-  address     = var.boundary_address
-  token       = var.boundary_vault_token
-  scope_id    = boundary_scope.project.id
-  namespace   = "admin"
-}
-
 resource "boundary_credential_library_vault" "dba" {
   name                = "northwind dba"
   description         = "northwind dba"
