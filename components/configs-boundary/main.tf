@@ -20,7 +20,7 @@ resource "hcp_vault_cluster_admin_token" "admin" {
 resource "boundary_credential_store_vault" "vault" {
   name        = "vault"
   description = "My Vault credential store!"
-  address     = var.boundary_address
+  address     = var.vault_address
   token       = hcp_vault_cluster_admin_token.admin.token
   scope_id    = boundary_scope.project.id
   namespace   = "admin"

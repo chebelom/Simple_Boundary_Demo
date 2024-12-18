@@ -11,6 +11,10 @@ variable "postgres_private_ip" {
     type = string
 }
 
+variable "vault_address" {
+    type = string  
+}
+
 variable "vault_cluster_id" {
     type = string
 }
