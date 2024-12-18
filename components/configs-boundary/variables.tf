@@ -15,6 +15,6 @@ variable "vault_address" {
     type = string  
 }
 
-# variable "vault_cluster_id" {
-#     type = string
-# }
+variable "vault_cluster_id" {
+    type = string
+}
