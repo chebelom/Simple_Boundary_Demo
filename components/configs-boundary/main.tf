@@ -13,10 +13,6 @@ resource "boundary_scope" "project" {
   auto_create_default_role = true
 }
 
-resource "hcp_vault_cluster_admin_token" "admin" {
-  cluster_id = var.vault_cluster_id
-}
-
 resource "boundary_credential_store_vault" "vault" {
   name        = "vault"
   description = "My Vault credential store!"
