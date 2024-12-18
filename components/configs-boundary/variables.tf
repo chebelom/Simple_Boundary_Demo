@@ -10,7 +10,3 @@ variable "boundary_vault_token" {
 variable "postgres_private_ip" {
     type = string
 }
-
-variable "vault_cluster_id" {
-    type = string
-}
