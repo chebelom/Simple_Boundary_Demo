@@ -17,7 +17,7 @@ resource "aws_instance" "boundary_upstream_worker" {
   instance_type          = "t2.micro"
   key_name               = var.aws_ssh_key
   # vpc_security_group_ids = [var.private_sg]
-  subnet_id              = var.private_sg
+  subnet_id              = var.aws_private_subnet
 
   # user_data_replace_on_change = false
   user_data_base64 = data.cloudinit_config.boundary_ingress_worker.rendered

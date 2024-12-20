@@ -26,3 +26,7 @@ variable "private_sg" {
 variable "aws_ssh_key" {
   type = string
 }
+
+variable "aws_private_subnet" {
+  type = string
+}
