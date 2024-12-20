@@ -27,6 +27,6 @@ variable "aws_ssh_key" {
   type = string
 }
 
-variable "aws_private_subnet" {
+variable "rec_worker_subnet" {
   type = string
 }
