@@ -14,7 +14,7 @@ data "aws_ami" "ubuntu_ami" {
 resource "aws_instance" "boundary_upstream_worker" {
   #count                  = 1
   ami                    = data.aws_ami.ubuntu_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   key_name               = var.aws_ssh_key
   # vpc_security_group_ids = [var.private_sg]
   subnet_id              = var.rec_worker_subnet
@@ -31,14 +31,9 @@ resource "aws_instance" "boundary_upstream_worker" {
       user_data_base64,
     ]
   }
+  depends_on = [ boundary_worker.ingress_pki_worker2 ]
 }
 
-
-resource "boundary_worker" "ingress_pki_worker" {
-  scope_id                    = "global"
-  name                        = "recording-pki-worker"
-  # worker_generated_auth_token = ""
-}
 
 resource "boundary_worker" "ingress_pki_worker2" {
   scope_id                    = "global"
