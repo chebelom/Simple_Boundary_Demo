@@ -42,6 +42,8 @@ component "infra" {
     region              = var.region
     boundary_username   = var.boundary_username
     boundary_cluster_id = var.boundary_cluster_id
+    boundary_address =  component.hcp_clusters.boundary_public_url
+    boundary_rec_worker_activation_token = component.boundary.boundary_rec_worker_activation_token
     private_sg          = component.networking.private_sg
     private_subnet1     = component.networking.private_subnet1
   }

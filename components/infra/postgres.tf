@@ -12,56 +12,6 @@ data "aws_ami" "ubuntu_ami" {
   owners = ["099720109477"] # Canonical account ID
 }
 
-# resource "aws_security_group" "public_network_ssh_postgres" {
-#   name        = "public_ssh_postgres"
-#   description = "Allow SSH and Postgres inbound traffic"
-#   vpc_id      = data.tfe_outputs.platform.values.vpc
-
-#   ingress {
-#     from_port   = 22
-#     to_port     = 22
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-
-#   ingress {
-#     from_port   = 5432
-#     to_port     = 5432
-#     protocol    = "tcp"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-
-#   egress {
-#     from_port   = 0
-#     to_port     = 0
-#     protocol    = "-1"
-#     cidr_blocks = ["0.0.0.0/0"]
-#   }
-
-#   tags = {
-#     Name = "allow_ssh_postgres"
-#   }
-# }
-
-# # Retrieve information about subnet1 created previously
-# data "aws_subnet" "example_subnet" {
-#   filter {
-#     name   = "cidr-block"
-#     values = ["172.31.1.0/24"]
-#   }
-
-#   filter {
-#     name   = "vpc-id"
-#     values = [data.tfe_outputs.platform.values.vpc]
-#   }
-# }
-
-
-# data "aws_key_pair" "example" {
-#   key_name           = var.key_pair_name
-#   include_public_key = true
-# }
-
 resource "aws_instance" "postgres_target" {
   #count                  = 1
   ami                    = data.aws_ami.ubuntu_ami.id

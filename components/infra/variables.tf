@@ -1,11 +1,3 @@
-# variable "boundary_username" {
-#   type = string
-# }
-
-# variable "boundary_password" {
-#   type = string
-# }
-
 variable "region" {
   description = "The region of the HCP HVN and Vault cluster."
   type        = string
@@ -15,24 +7,6 @@ variable "key_pair_name" {
   type    = string
   default = "stacks-ec2-key"
 }
-
-# variable "scenario5_ssh_alias" {
-#   type    = string
-#   default = "scenario5.ssh.injected.boundary.demo"
-# }
-
-# variable "scenario5_rdp_alias" {
-#   type    = string
-#   default = "scenario5.rdp.broker.boundary.demo"
-# }
-
-# variable "aws_account_id" {
-#   type = string
-# }
-
-# variable "tfc_organization" {
-#   type = string
-# }
 
 variable "postgres_password" {
   type    = string
@@ -45,4 +19,13 @@ variable "private_subnet1" {
 
 variable "private_sg" {
   type = string
+}
+
+variable "boundary_address" {
+  type = string
+}
+
+variable "boundary_rec_worker_activation_token" {
+  type = string
+  sensitive = true
 }
