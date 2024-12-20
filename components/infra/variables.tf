@@ -20,12 +20,3 @@ variable "private_subnet1" {
 variable "private_sg" {
   type = string
 }
-
-variable "boundary_address" {
-  type = string
-}
-
-variable "boundary_rec_worker_activation_token" {
-  type = string
-  sensitive = true
-}

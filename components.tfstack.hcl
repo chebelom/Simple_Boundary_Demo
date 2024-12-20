@@ -30,6 +30,8 @@ component "hcp_clusters" {
     vault_cluster_id = var.vault_cluster_id
   }
 }
+
+
 component "infra" {
   source = "./components/infra"
   providers = {
@@ -42,8 +44,6 @@ component "infra" {
     region              = var.region
     boundary_username   = var.boundary_username
     boundary_cluster_id = var.boundary_cluster_id
-    boundary_address =  component.hcp_clusters.boundary_public_url
-    boundary_rec_worker_activation_token = component.boundary.boundary_rec_worker_activation_token
     private_sg          = component.networking.private_sg
     private_subnet1     = component.networking.private_subnet1
   }
@@ -64,7 +64,9 @@ component "vault-config" {
 component "boundary"  {
   source = "./components/configs-boundary"
     providers = {
+      aws = provider.aws.this
       boundary = provider.boundary.this
+      cloudinit = provider.cloudinit.this
   }
   inputs = {
     boundary_address = component.hcp_clusters.boundary_public_url
@@ -72,5 +74,7 @@ component "boundary"  {
     postgres_private_ip = component.infra.postgres_private_ip
     vault_address = component.hcp_clusters.vault_public_url
     vault_cluster_id = var.vault_cluster_id
+    aws_ssh_key = component.networking.private_sg
+    private_sg = component.infra.ssh_key_private
   }
 }

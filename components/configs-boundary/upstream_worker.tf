@@ -1,8 +1,21 @@
+data "aws_ami" "ubuntu_ami" {
+  most_recent = true
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+  owners = ["099720109477"] # Canonical account ID
+}
+
 resource "aws_instance" "boundary_upstream_worker" {
   #count                  = 1
   ami                    = data.aws_ami.ubuntu_ami.id
   instance_type          = "t2.micro"
-  key_name               = aws_key_pair.ec2_key.key_name
+  key_name               = var.aws_ssh_key
   security_groups = [var.private_sg]
   subnet_id              = var.private_sg
 
@@ -63,7 +76,7 @@ locals {
   worker {
     public_addr = "IP"
     auth_storage_path = "/etc/boundary.d/worker"
-    controller_generated_activation_token = "${var.boundary_rec_worker_activation_token}"
+    controller_generated_activation_token = "${boundary_worker.ingress_pki_worker.controller_generated_activation_token}"
     recording_storage_path="/tmp/boundary"
     tags {
       type = ["worker_ssh", "upstream"]

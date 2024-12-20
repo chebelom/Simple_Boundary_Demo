@@ -18,3 +18,11 @@ variable "vault_address" {
 variable "vault_cluster_id" {
     type = string
 }
+
+variable "private_sg" {
+    type = string
+}
+
+variable "aws_ssh_key" {
+  type = string
+}

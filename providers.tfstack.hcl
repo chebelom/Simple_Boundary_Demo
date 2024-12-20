@@ -27,7 +27,6 @@ required_providers {
     source  = "hashicorp/cloudinit"
     version = "2.3.5"
   }
-
 }
 
 provider "aws" "this" {
