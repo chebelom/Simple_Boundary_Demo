@@ -11,33 +11,33 @@ data "aws_ami" "ubuntu_ami" {
   owners = ["099720109477"] # Canonical account ID
 }
 
-resource "aws_instance" "boundary_upstream_worker" {
-  #count                  = 1
-  ami                    = data.aws_ami.ubuntu_ami.id
-  instance_type          = "t2.micro"
-  key_name               = var.aws_ssh_key
-  # vpc_security_group_ids = [var.private_sg]
-  subnet_id              = var.rec_worker_subnet
+# resource "aws_instance" "boundary_upstream_worker" {
+#   #count                  = 1
+#   ami                    = data.aws_ami.ubuntu_ami.id
+#   instance_type          = "t2.micro"
+#   key_name               = var.aws_ssh_key
+#   # vpc_security_group_ids = [var.private_sg]
+#   subnet_id              = var.rec_worker_subnet
 
-  # user_data_replace_on_change = false
-  user_data_base64 = data.cloudinit_config.boundary_ingress_worker.rendered
+#   # user_data_replace_on_change = false
+#   user_data_base64 = data.cloudinit_config.boundary_ingress_worker.rendered
 
-  tags = {
-    Name = "boundary-session-recording-pki-worker"
-  }
+#   tags = {
+#     Name = "boundary-session-recording-pki-worker"
+#   }
 
-  lifecycle {
-    ignore_changes = [
-      user_data_base64,
-    ]
-  }
-}
+#   lifecycle {
+#     ignore_changes = [
+#       user_data_base64,
+#     ]
+#   }
+# }
 
 
 # resource "boundary_worker" "ingress_pki_worker" {
 #   scope_id                    = "global"
 #   name                        = "recording-pki-worker"
-#   worker_generated_auth_token = ""
+#   # worker_generated_auth_token = ""
 # }
 
 
