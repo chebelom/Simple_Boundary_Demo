@@ -16,7 +16,7 @@ resource "aws_instance" "boundary_upstream_worker" {
   ami                    = data.aws_ami.ubuntu_ami.id
   instance_type          = "t2.micro"
   key_name               = var.aws_ssh_key
-  vpc_security_group_ids = [var.private_sg]
+  # vpc_security_group_ids = [var.private_sg]
   subnet_id              = var.private_sg
 
   # user_data_replace_on_change = false
