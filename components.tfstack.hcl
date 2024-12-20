@@ -76,5 +76,6 @@ component "boundary"  {
     vault_cluster_id = var.vault_cluster_id
     aws_ssh_key = component.infra.ssh_key_private
     private_sg = component.networking.private_sg
+    aws_private_subnet = component.networking.private_subnet1
   }
 }
