@@ -104,3 +104,8 @@ variable "aws_vpc_cidr" {
   description = "VPC CIDR"
   default     = "172.31.0.0/16"
 }
+
+variable "key_pair_name" {
+  type    = string
+  default = "stacks-ec2-key"
+}

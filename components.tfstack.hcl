@@ -46,6 +46,7 @@ component "infra" {
     boundary_cluster_id = var.boundary_cluster_id
     private_sg          = component.networking.private_sg
     private_subnet1     = component.networking.private_subnet1
+    key_pair_name = var.key_pair_name
   }
 }
 
@@ -74,7 +75,7 @@ component "boundary"  {
     postgres_private_ip = component.infra.postgres_private_ip
     vault_address = component.hcp_clusters.vault_public_url
     vault_cluster_id = var.vault_cluster_id
-    aws_ssh_key = component.infra.ssh_key_private
+    aws_ssh_key = var.key_pair_name
     private_sg = component.networking.private_sg
     aws_private_subnet = component.networking.private_subnet1
   }

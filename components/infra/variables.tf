@@ -5,7 +5,6 @@ variable "region" {
 
 variable "key_pair_name" {
   type    = string
-  default = "stacks-ec2-key"
 }
 
 variable "postgres_password" {
