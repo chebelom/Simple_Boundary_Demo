@@ -66,7 +66,7 @@ resource "boundary_target" "ssh" {
   type        = "ssh"
   name        = "SSH target inject"
   description = "SSH target inject"
-  #egress_worker_filter     = " \"sm-egress-downstream-worker1\" in \"/tags/type\" "
+  egress_worker_filter     = " \"worker_ssh\" in \"/tags/type\" "
   #ingress_worker_filter    = " \"sm-ingress-upstream-worker1\" in \"/tags/type\" "
   scope_id                 = boundary_scope.project.id
   session_connection_limit = -1
