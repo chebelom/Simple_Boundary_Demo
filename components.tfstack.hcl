@@ -65,23 +65,34 @@ component "vault-config" {
   }
 }
 
-component "boundary" {
-  source = "./components/configs-boundary"
+removed {
+ source = "./components/configs-boundary"
+ from = component.boundary
   providers = {
     aws       = provider.aws.this
     boundary  = provider.boundary.this
     cloudinit = provider.cloudinit.this
     null = provider.null.this
   }
-  inputs = {
-    boundary_address      = component.hcp_clusters.boundary_public_url
-    boundary_vault_token  = component.vault-config.boundary_vault_token
-    postgres_private_ip   = component.infra.postgres_private_ip
-    vault_address         = component.hcp_clusters.vault_public_url
-    vault_cluster_id      = var.vault_cluster_id
-    aws_ssh_key           = var.key_pair_name
-    private_sg            = component.networking.private_sg
-    rec_worker_subnet     = component.networking.private_subnet1
-    ssh_inject_private_ip = component.infra.ssh_inject_private_ip
-  }
+
 }
+# component "boundary" {
+#   source = "./components/configs-boundary"
+#   providers = {
+#     aws       = provider.aws.this
+#     boundary  = provider.boundary.this
+#     cloudinit = provider.cloudinit.this
+#     null = provider.null.this
+#   }
+#   inputs = {
+#     boundary_address      = component.hcp_clusters.boundary_public_url
+#     boundary_vault_token  = component.vault-config.boundary_vault_token
+#     postgres_private_ip   = component.infra.postgres_private_ip
+#     vault_address         = component.hcp_clusters.vault_public_url
+#     vault_cluster_id      = var.vault_cluster_id
+#     aws_ssh_key           = var.key_pair_name
+#     private_sg            = component.networking.private_sg
+#     rec_worker_subnet     = component.networking.private_subnet1
+#     ssh_inject_private_ip = component.infra.ssh_inject_private_ip
+#   }
+# }
