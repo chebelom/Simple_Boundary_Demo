@@ -39,7 +39,7 @@ resource "boundary_target" "dba" {
   type        = "tcp"
   name        = "Database Admin"
   description = "DBA Target"
-  #egress_worker_filter     = " \"sm-egress-downstream-worker1\" in \"/tags/type\" "
+  egress_worker_filter     = " \"worker_ssh\" in \"/tags/type\" "
   #ingress_worker_filter    = " \"sm-ingress-upstream-worker1\" in \"/tags/type\" "
   scope_id                 = boundary_scope.project.id
   session_connection_limit = -1
@@ -53,7 +53,6 @@ resource "boundary_target" "dba" {
   ]
 
 }
-
 resource "boundary_alias_target" "scenario2_dba" {
   name           = "Database Admin Alias"
   description    = "The alias used by admins to reach the DB"
@@ -67,6 +66,7 @@ resource "boundary_target" "analyst" {
   type                     = "tcp"
   name                     = "Database Analyst"
   description              = "Analyst Target"
+  egress_worker_filter     = " \"worker_ssh\" in \"/tags/type\" "
   scope_id                 = boundary_scope.project.id
   session_connection_limit = -1
   default_port             = 5432
