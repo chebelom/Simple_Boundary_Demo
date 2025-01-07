@@ -57,7 +57,7 @@ resource "vault_policy" "northwind_database" {
 resource "vault_token" "boundary_token_dba" {
   no_default_policy = true
   period            = "20m"
-  policies          = ["boundary-controller", "northwind-database"]
+  policies          = ["boundary-controller", "northwind-database", "ssh"]
   no_parent         = true
   renewable         = true
 
