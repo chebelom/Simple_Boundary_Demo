@@ -27,6 +27,10 @@ required_providers {
     source  = "hashicorp/cloudinit"
     version = "2.3.5"
   }
+  http = {
+    source = "hashicorp/http"
+    version = "3.4.5"
+  }
 }
 
 provider "aws" "this" {
@@ -65,6 +69,8 @@ provider "time" "this" {
 provider "cloudinit" "this" {
 }
 
+provider "http" "this" {
+}
 
 provider "boundary" "this" {
   config {

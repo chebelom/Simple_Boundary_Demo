@@ -39,6 +39,7 @@ component "infra" {
     tls       = provider.tls.this
     time      = provider.time.this
     cloudinit = provider.cloudinit.this
+    http = provider.http.this
   }
   inputs = {
     region               = var.region
@@ -47,8 +48,7 @@ component "infra" {
     private_sg           = component.networking.private_sg
     private_subnet1      = component.networking.private_subnet1
     key_pair_name        = var.key_pair_name
-    # vault_ssh_public_key = component.vault-config.vault_ssh_public_key
-
+    vault_public_url         = component.hcp_clusters.vault_public_url
   }
 }
 
