@@ -31,10 +31,10 @@ required_providers {
     source = "hashicorp/http"
     version = "3.4.5"
   }
-  null = {
-    source = "hashicorp/null"
-    version = "3.2.3"
-  }
+  # null = {
+  #   source = "hashicorp/null"
+  #   version = "3.2.3"
+  # }
 }
 
 provider "aws" "this" {
@@ -76,8 +76,8 @@ provider "cloudinit" "this" {
 provider "http" "this" {
 }
 
-provider "null" "this" {
-}
+# provider "null" "this" {
+# }
 
 provider "boundary" "this" {
   config {
