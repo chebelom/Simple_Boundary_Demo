@@ -16,6 +16,10 @@ variable "private_subnet1" {
   type = string
 }
 
+variable "public_subnet" {
+  type = string
+}
+
 variable "private_sg" {
   type = string
 }

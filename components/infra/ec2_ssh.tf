@@ -95,7 +95,7 @@ resource "aws_instance" "ssh_injection_target" {
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.ec2_key.key_name
   vpc_security_group_ids = [var.private_sg]
-  subnet_id               = var.private_subnet1
+  subnet_id               = var.public_subnet
 
   user_data_replace_on_change = true
   user_data_base64            = data.cloudinit_config.ssh.rendered

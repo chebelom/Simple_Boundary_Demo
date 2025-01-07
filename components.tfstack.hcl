@@ -47,6 +47,7 @@ component "infra" {
     boundary_cluster_id  = var.boundary_cluster_id
     private_sg           = component.networking.private_sg
     private_subnet1      = component.networking.private_subnet1
+    public_subnet = component.networking.public_subnet1
     key_pair_name        = var.key_pair_name
     vault_public_url         = component.hcp_clusters.vault_public_url
   }
