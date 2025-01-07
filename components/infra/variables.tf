@@ -20,6 +20,6 @@ variable "private_sg" {
   type = string
 }
 
-variable "vault_ssh_public_key" {
-  type = string
-}
+# variable "vault_ssh_public_key" {
+#   type = string
+# }

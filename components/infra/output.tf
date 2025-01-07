@@ -12,6 +12,6 @@ output "postgres_private_ip" {
   value = aws_instance.postgres_target.private_ip
 }
 
-output "ssh_inject_private_ip" {
-  value = aws_instance.ssh_injection_target.private_ip
-}
+# output "ssh_inject_private_ip" {
+#   value = aws_instance.ssh_injection_target.private_ip
+# }

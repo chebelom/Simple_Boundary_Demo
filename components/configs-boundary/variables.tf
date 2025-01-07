@@ -11,9 +11,9 @@ variable "postgres_private_ip" {
     type = string
 }
 
-variable "ssh_inject_private_ip" {
-    type = string  
-}
+# variable "ssh_inject_private_ip" {
+#     type = string  
+# }
 
 variable "vault_address" {
     type = string  
