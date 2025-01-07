@@ -37,12 +37,6 @@ resource "aws_instance" "boundary_upstream_worker" {
 resource "boundary_worker" "pki_ssh_worker" {
   scope_id                    = "global"
   name                        = "ssh-worker"
-  
-  # lifecycle {
-  #   replace_triggered_by = [
-  #     null_resource.always_run
-  #   ]
-  # }
 }
 
 locals {
