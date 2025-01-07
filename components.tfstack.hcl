@@ -80,6 +80,6 @@ component "boundary" {
     aws_ssh_key           = var.key_pair_name
     private_sg            = component.networking.private_sg
     rec_worker_subnet     = component.networking.public_subnet1
-    # ssh_inject_private_ip = component.infra.ssh_inject_private_ip
+    ssh_inject_private_ip = component.infra.ssh_inject_private_ip
   }
 }
