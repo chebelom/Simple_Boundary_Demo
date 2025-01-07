@@ -26,11 +26,11 @@ resource "aws_instance" "boundary_upstream_worker" {
     Name = "ssh-worker"
   }
 
-  # lifecycle {
-  #   ignore_changes = [
-  #     user_data_base64,
-  #   ]
-  # }
+  lifecycle {
+    ignore_changes = [
+      user_data_base64,
+    ]
+  }
   depends_on = [ boundary_worker.pki_worker ]
 }
 
@@ -44,11 +44,11 @@ resource "boundary_worker" "pki_worker" {
   scope_id                    = "global"
   name                        = "ssh-worker"
   
-  lifecycle {
-    replace_triggered_by = [
-      null_resource.always_run
-    ]
-  }
+  # lifecycle {
+  #   replace_triggered_by = [
+  #     null_resource.always_run
+  #   ]
+  # }
 }
 
 locals {
