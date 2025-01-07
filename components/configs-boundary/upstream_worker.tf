@@ -14,7 +14,7 @@ data "aws_ami" "ubuntu_ami" {
 resource "aws_instance" "boundary_upstream_worker" {
   #count                  = 1
   ami                    = data.aws_ami.ubuntu_ami.id
-  instance_type          = "t2.micro"
+  instance_type          = "t3.micro"
   key_name               = var.aws_ssh_key
   # vpc_security_group_ids = [var.private_sg]
   subnet_id              = var.rec_worker_subnet
@@ -31,16 +31,10 @@ resource "aws_instance" "boundary_upstream_worker" {
       user_data_base64,
     ]
   }
-  depends_on = [ boundary_worker.pki_worker ]
+  depends_on = [ boundary_worker.pki_ssh_worker ]
 }
 
-resource "null_resource" "always_run" {
-  triggers = {
-    timestamp = "${timestamp()}"
-  }
-}
-
-resource "boundary_worker" "pki_worker" {
+resource "boundary_worker" "pki_ssh_worker" {
   scope_id                    = "global"
   name                        = "ssh-worker"
   
@@ -86,7 +80,7 @@ locals {
   worker {
     public_addr = "IP"
     auth_storage_path = "/etc/boundary.d/worker"
-    controller_generated_activation_token = "${boundary_worker.pki_worker.controller_generated_activation_token}"
+    controller_generated_activation_token = "${boundary_worker.pki_ssh_worker.controller_generated_activation_token}"
     recording_storage_path="/tmp/boundary"
     tags {
       type = ["worker_ssh", "upstream"]
