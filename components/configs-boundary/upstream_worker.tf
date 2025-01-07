@@ -34,9 +34,21 @@ resource "aws_instance" "boundary_upstream_worker" {
   depends_on = [ boundary_worker.pki_worker ]
 }
 
+resource "null_resource" "always_run" {
+  triggers = {
+    timestamp = "${timestamp()}"
+  }
+}
+
 resource "boundary_worker" "pki_worker" {
   scope_id                    = "global"
   name                        = "ssh-worker"
+  
+  lifecycle {
+    replace_triggered_by = [
+      null_resource.always_run
+    ]
+  }
 }
 
 locals {

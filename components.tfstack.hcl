@@ -71,6 +71,7 @@ component "boundary" {
     aws       = provider.aws.this
     boundary  = provider.boundary.this
     cloudinit = provider.cloudinit.this
+    null = provider.null.this
   }
   inputs = {
     boundary_address      = component.hcp_clusters.boundary_public_url
