@@ -18,3 +18,9 @@ deployment "demo" {
   }
 }
 
+orchestrate "auto_approve" "safe_plans" {
+    check {
+        condition = context.plan.changes.remove == 0
+        reason    = "Plan is destroying ${context.plan.changes.remove} resources."
+    }
+}
