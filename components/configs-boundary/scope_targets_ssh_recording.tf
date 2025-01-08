@@ -151,6 +151,7 @@ resource "boundary_policy_storage" "default_policy" {
   description = "Default storage policy"
   scope_id    = "global"
   retain_for_days = 0
+  delete_after_days = 90
 }
 
 # resource "boundary_credential_store_vault" "vault" {
