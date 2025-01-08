@@ -86,5 +86,5 @@ resource "boundary_alias_target" "win_http" {
   description    = "Windows HTTP Alias"
   scope_id       = "global"
   value          = "http-win.boundary.demo"
-  destination_id = boundary_target.win_http
+  destination_id = boundary_target.win_http.id
 }
