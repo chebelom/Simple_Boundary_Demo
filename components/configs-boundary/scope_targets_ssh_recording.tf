@@ -146,6 +146,11 @@ resource "boundary_storage_bucket" "boundary_recordings" {
   # depends_on = [time_sleep.boundary_ready]
 }
 
+resource "boundary_policy_storage" "default_policy" {
+  name        = "default"
+  description = "Default storage policy"
+  scope_id    = "global"
+}
 
 # resource "boundary_credential_store_vault" "vault" {
 #   name        = "certificates-store"
