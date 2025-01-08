@@ -125,7 +125,7 @@ infrastructure-related resources
 # # to provision a storage bucket with this demo, or you can manage this in your Boundary Cluster Configuration
 
 resource "boundary_storage_bucket" "boundary_recordings" {
-  name        = "Boundary Recordings"
+  name        = "Boundary SSH Recordings"
   description = "The bucket that stores ssh sessions recordings!"
   scope_id    = "global"
   plugin_name = "aws"
