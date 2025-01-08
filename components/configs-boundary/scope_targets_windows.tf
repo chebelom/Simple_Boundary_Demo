@@ -41,6 +41,7 @@ resource "boundary_target" "win_rdp" {
   name                     = "Windows RDP"
   description              = "Windows RDP Target"
   scope_id                 = boundary_scope.project.id
+  egress_worker_filter     = " \"worker_ssh\" in \"/tags/type\" "
   session_connection_limit = -1
   default_port             = 3389
   host_source_ids = [
