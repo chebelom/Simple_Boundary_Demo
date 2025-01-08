@@ -86,7 +86,9 @@ component "boundary" {
   }
   inputs = {
     boundary_address      = component.hcp_clusters.boundary_public_url
-    boundary_vault_token  = component.vault-config.boundary_vault_token
+    boundary_vault_token_db = component.vault-config.boundary_vault_token_db
+    boundary_vault_token_ssh = component.vault-config.boundary_vault_token_ssh
+    boundary_vault_token_windows = component.vault-config.boundary_vault_token_windows
     postgres_private_ip   = component.infra.postgres_private_ip
     vault_address         = component.hcp_clusters.vault_public_url
     vault_cluster_id      = var.vault_cluster_id
@@ -94,5 +96,6 @@ component "boundary" {
     private_sg            = component.networking.private_sg
     rec_worker_subnet     = component.networking.private_subnet1
     ssh_inject_private_ip = component.infra.ssh_inject_private_ip
+    windows_server_private_ip = component.infra.windows_private_ip
   }
 }

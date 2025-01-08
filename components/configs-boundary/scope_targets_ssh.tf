@@ -1,33 +1,16 @@
-# data "boundary_scope" "org" {
-#   name     = "Demo"
-#   scope_id = "global"
-# }
-
-# /* Create a project scope within the "ops-org" organsation
-# Each org can contain multiple projects and projects are used to hold
-# infrastructure-related resources
-# */
-# resource "boundary_scope" "project" {
-#   name                     = "Scenario3_ssh-project"
-#   description              = "SSH test machines"
-#   scope_id                 = data.boundary_scope.org.id
-#   auto_create_admin_role   = true
-#   auto_create_default_role = true
-# }
-
-# resource "boundary_credential_store_vault" "vault" {
-#   name        = "certificates-store"
-#   description = "My second Vault credential store!"
-#   address     = data.tfe_outputs.platform.values.vault_public_url
-#   token       = vault_token.boundary_token.client_token
-#   scope_id    = boundary_scope.project.id
-#   namespace   = "admin"
-# }
+resource "boundary_credential_store_vault" "vault_ssh" {
+  name        = "vault"
+  description = "Vault cred store for SSH!"
+  address     = var.vault_address
+  token       = var.boundary_vault_token_ssh
+  scope_id    = boundary_scope.project.id
+  namespace   = "admin"
+}
 
 resource "boundary_credential_library_vault_ssh_certificate" "ssh" {
   name                = "certificates-library"
   description         = "Certificate Library"
-  credential_store_id = boundary_credential_store_vault.vault.id
+  credential_store_id = boundary_credential_store_vault.vault_ssh.id
   path                = "ssh-client-signer/sign/boundary-client" # change to Vault backend path
   username            = "ubuntu"
   key_type            = "ecdsa"
@@ -37,7 +20,6 @@ resource "boundary_credential_library_vault_ssh_certificate" "ssh" {
     permit-pty = ""
   }
 }
-
 
 resource "boundary_host_catalog_static" "aws_instance_ssh" {
   name        = "ssh-catalog"

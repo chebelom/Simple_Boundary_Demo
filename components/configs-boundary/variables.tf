@@ -2,7 +2,17 @@ variable "boundary_address" {
     type = string
 }
 
-variable "boundary_vault_token" {
+variable "boundary_vault_token_db" {
+    type = string
+    sensitive = true  
+}
+
+variable "boundary_vault_token_ssh" {
+    type = string
+    sensitive = true  
+}
+
+variable "boundary_vault_token_windows" {
     type = string
     sensitive = true  
 }
@@ -13,6 +23,10 @@ variable "postgres_private_ip" {
 
 variable "ssh_inject_private_ip" {
     type = string  
+}
+
+variable "windows_server_private_ip" {
+  type = string
 }
 
 variable "vault_address" {

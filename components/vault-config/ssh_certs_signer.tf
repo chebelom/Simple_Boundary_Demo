@@ -1,18 +1,3 @@
-
-# resource "vault_policy" "ssh_signer" {
-#   name = "ssh"
-
-#   policy = <<-EOT
-#     path "ssh-client-signer/issue/boundary-client" {
-#       capabilities = ["create", "update"]
-#     }
-
-#     path "ssh-client-signer/sign/boundary-client" {
-#       capabilities = ["create", "update"]
-#     }
-#     EOT
-# }
-
 resource "vault_policy" "ssh_signer" {
   name = "ssh"
   policy = file("${path.module}/vault_policies/ssh_signer.hcl")
@@ -49,7 +34,6 @@ resource "vault_token" "boundary_token_ssh" {
     "purpose" = "service-account-boundary"
   }
 }
-
 
 resource "vault_ssh_secret_backend_role" "signer" {
   backend                 = vault_mount.ssh.path

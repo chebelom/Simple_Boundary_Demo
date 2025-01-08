@@ -1,4 +1,5 @@
-# resource "hcp_vault_cluster_admin_token" "token" {
-#   cluster_id = var.vault_cluster_id
-#   depends_on = [hcp_vault_cluster.hcp_vault]
-# }
+resource "vault_policy" "boundary_controller" {
+  name = "boundary-controller"
+
+  policy = file("${path.module}/vault_policies/boundary-controller-policy.hcl")
+}

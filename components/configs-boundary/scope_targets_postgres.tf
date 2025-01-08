@@ -1,7 +1,16 @@
+resource "boundary_credential_store_vault" "vault_db" {
+  name        = "vault"
+  description = "Vault cred store for DBs!"
+  address     = var.vault_address
+  token       = var.boundary_vault_token_db
+  scope_id    = boundary_scope.project.id
+  namespace   = "admin"
+}
+
 resource "boundary_credential_library_vault" "dba" {
   name                = "northwind dba"
   description         = "northwind dba"
-  credential_store_id = boundary_credential_store_vault.vault.id
+  credential_store_id = boundary_credential_store_vault.vault_db.id
   path                = "database/creds/dba" # change to Vault backend path
   http_method         = "GET"
 }
@@ -9,7 +18,7 @@ resource "boundary_credential_library_vault" "dba" {
 resource "boundary_credential_library_vault" "analyst" {
   name                = "northwind analyst"
   description         = "northwind analyst"
-  credential_store_id = boundary_credential_store_vault.vault.id
+  credential_store_id = boundary_credential_store_vault.vault_db.id
   path                = "database/creds/analyst" # change to Vault backend path
   http_method         = "GET"
 }
@@ -40,7 +49,6 @@ resource "boundary_target" "dba" {
   name        = "Database Admin"
   description = "DBA Target"
   egress_worker_filter     = " \"worker_ssh\" in \"/tags/type\" "
-  #ingress_worker_filter    = " \"sm-ingress-upstream-worker1\" in \"/tags/type\" "
   scope_id                 = boundary_scope.project.id
   session_connection_limit = -1
   default_port             = 5432
