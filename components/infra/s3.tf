@@ -18,10 +18,10 @@ resource "aws_s3_bucket_public_access_block" "public_access" {
   restrict_public_buckets = true
 }
 
-# resource "random_id" "bucket_name" {
-#   prefix      = "stacks-boundary-recordings"
-#   byte_length = 4
-# }
+resource "random_id" "bucket_name" {
+  prefix      = "stacks-boundary-recordings"
+  byte_length = 4
+}
 
 resource "aws_s3_bucket" "storage_bucket" {
   bucket        = "stacks-boundary-recordings"
