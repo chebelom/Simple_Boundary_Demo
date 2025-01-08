@@ -146,6 +146,29 @@ resource "boundary_storage_bucket" "boundary_recordings" {
   # depends_on = [time_sleep.boundary_ready]
 }
 
+
+resource "boundary_storage_bucket" "ya_boundary_recordings" {
+  name        = "Boundary SSH Recordings"
+  description = "The bucket that stores ssh sessions recordings!"
+  scope_id    = "global"
+  plugin_name = "aws"
+  # bucket_name = aws_s3_bucket.storage_bucket.id
+  bucket_name = var.aws_recording_bucket_name
+  attributes_json = jsonencode({
+  "region" = "${var.region}",
+  "disable_credential_rotation" : true })
+
+  # recommended to pass in aws secrets using a file() or using environment variables
+  # the secrets below must be generated in aws by creating a aws iam user with programmatic access
+  secrets_json = jsonencode({
+    "access_key_id"     = var.aws_iam_access_key_boundary_session_recording_id,
+    "secret_access_key" = var.aws_iam_access_key_boundary_session_recording_secret,
+  })
+  worker_filter = " \"worker_ssh\" in \"/tags/type\" "
+
+  # depends_on = [time_sleep.boundary_ready]
+}
+
 resource "boundary_policy_storage" "default_policy" {
   name        = "default"
   description = "Default storage policy"
@@ -218,7 +241,7 @@ resource "boundary_target" "ssh_rec" {
   ]
 
   enable_session_recording = true
-  storage_bucket_id        = boundary_storage_bucket.boundary_recordings.id
+  storage_bucket_id        = boundary_storage_bucket.ya_boundary_recordings.id
 
   injected_application_credential_source_ids = [
     boundary_credential_library_vault_ssh_certificate.ssh.id
