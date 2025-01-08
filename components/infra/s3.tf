@@ -1,6 +1,8 @@
 locals {
-  hashicorp_email = split(":", data.aws_caller_identity.current.user_id)[1]
-  my_email = split("/", data.aws_caller_identity.current.arn)[2]
+  # hashicorp_email = split(":", data.aws_caller_identity.current.user_id)[1]
+  # my_email = split("/", data.aws_caller_identity.current.arn)[2]
+  hashicorp_email = "andrea.detassis@hashicorp.com"
+  my_email = "this_is_a_test@hashicorp.com"
 }
 
 data "aws_caller_identity" "current" {}
