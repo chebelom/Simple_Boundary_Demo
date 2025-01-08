@@ -1,5 +1,5 @@
 resource "boundary_credential_store_vault" "vault_win" {
-  name        = "vault"
+  name        = "vault-windows"
   description = "Vault cred store for windows!"
   address     = var.vault_address
   token       = var.boundary_vault_token_windows

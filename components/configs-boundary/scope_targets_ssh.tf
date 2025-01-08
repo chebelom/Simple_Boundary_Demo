@@ -1,5 +1,5 @@
 resource "boundary_credential_store_vault" "vault_ssh" {
-  name        = "vault"
+  name        = "vault-ssh"
   description = "Vault cred store for SSH!"
   address     = var.vault_address
   token       = var.boundary_vault_token_ssh

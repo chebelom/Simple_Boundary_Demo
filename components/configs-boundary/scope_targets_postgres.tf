@@ -1,5 +1,5 @@
 resource "boundary_credential_store_vault" "vault_db" {
-  name        = "vault"
+  name        = "vault-databases"
   description = "Vault cred store for DBs!"
   address     = var.vault_address
   token       = var.boundary_vault_token_db
