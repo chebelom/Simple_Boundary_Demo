@@ -39,17 +39,17 @@ component "infra" {
     tls       = provider.tls.this
     time      = provider.time.this
     cloudinit = provider.cloudinit.this
-    http = provider.http.this
+    http      = provider.http.this
   }
   inputs = {
-    region               = var.region
-    boundary_username    = var.boundary_username
-    boundary_cluster_id  = var.boundary_cluster_id
-    private_sg           = component.networking.private_sg
-    private_subnet1      = component.networking.private_subnet1
-    public_subnet = component.networking.public_subnet1
-    key_pair_name        = var.key_pair_name
-    vault_public_url         = component.hcp_clusters.vault_public_url
+    region              = var.region
+    boundary_username   = var.boundary_username
+    boundary_cluster_id = var.boundary_cluster_id
+    private_sg          = component.networking.private_sg
+    private_subnet1     = component.networking.private_subnet1
+    public_subnet       = component.networking.public_subnet1
+    key_pair_name       = var.key_pair_name
+    vault_public_url    = component.hcp_clusters.vault_public_url
   }
 }
 
@@ -85,17 +85,17 @@ component "boundary" {
     # null = provider.null.this
   }
   inputs = {
-    boundary_address      = component.hcp_clusters.boundary_public_url
-    boundary_vault_token_db = component.vault-config.boundary_vault_token_db
-    boundary_vault_token_ssh = component.vault-config.boundary_vault_token_ssh
+    boundary_address             = component.hcp_clusters.boundary_public_url
+    boundary_vault_token_db      = component.vault-config.boundary_vault_token_db
+    boundary_vault_token_ssh     = component.vault-config.boundary_vault_token_ssh
     boundary_vault_token_windows = component.vault-config.boundary_vault_token_windows
-    postgres_private_ip   = component.infra.postgres_private_ip
-    vault_address         = component.hcp_clusters.vault_public_url
-    vault_cluster_id      = var.vault_cluster_id
-    aws_ssh_key           = var.key_pair_name
-    private_sg            = component.networking.private_sg
-    rec_worker_subnet     = component.networking.private_subnet1
-    ssh_inject_private_ip = component.infra.ssh_inject_private_ip
-    windows_server_private_ip = component.infra.windows_private_ip
+    postgres_private_ip          = component.infra.postgres_private_ip
+    vault_address                = component.hcp_clusters.vault_public_url
+    vault_cluster_id             = var.vault_cluster_id
+    aws_ssh_key                  = var.key_pair_name
+    private_sg                   = component.networking.private_sg
+    rec_worker_subnet            = component.networking.private_subnet1
+    ssh_inject_private_ip        = component.infra.ssh_inject_private_ip
+    windows_server_private_ip    = component.infra.windows_private_ip
   }
 }
