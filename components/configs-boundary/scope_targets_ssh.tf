@@ -64,7 +64,7 @@ resource "boundary_target" "ssh" {
 }
 
 resource "boundary_alias_target" "scenario3_ssh_injection" {
-  name           = "SSH Injection AliaS"
+  name           = "SSH Injection Alias"
   description    = "The alias used to access the SSH private resource"
   scope_id       = "global"
   value          = "ssh.boundary.demo"

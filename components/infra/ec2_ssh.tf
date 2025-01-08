@@ -4,7 +4,6 @@ data "http" "ssh_ca_public_key" {
   request_headers = {
     X-Vault-Namespace = "admin"
   }
-
 }
 
 

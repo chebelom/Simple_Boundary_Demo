@@ -40,6 +40,7 @@ component "infra" {
     time      = provider.time.this
     cloudinit = provider.cloudinit.this
     http      = provider.http.this
+    random = provider.random.this
   }
   inputs = {
     region              = var.region
@@ -97,5 +98,9 @@ component "boundary" {
     rec_worker_subnet            = component.networking.private_subnet1
     ssh_inject_private_ip        = component.infra.ssh_inject_private_ip
     windows_server_private_ip    = component.infra.windows_private_ip
+    aws_iam_access_key_boundary_session_recording_id = component.infra.aws_iam_access_key_boundary_session_recording_id
+    aws_iam_access_key_boundary_session_recording_secret = component.infra.aws_iam_access_key_boundary_session_recording_secret
+    aws_recording_bucket_name = component.infra.aws_recording_bucket_name
+    region = var.region
   }
 }

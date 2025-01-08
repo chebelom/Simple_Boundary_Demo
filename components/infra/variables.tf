@@ -27,3 +27,12 @@ variable "private_sg" {
 variable "vault_public_url" {
     type = string
 }
+variable "common_tags" {
+  type        = map(string)
+  description = "Map of common tags for all taggable AWS resources."
+  default     = {
+    Stacks     = "True"
+    Component  = "Boundary"
+    Environment = "Demo"
+  }
+}

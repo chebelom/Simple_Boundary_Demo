@@ -48,3 +48,24 @@ variable "aws_ssh_key" {
 variable "rec_worker_subnet" {
   type = string
 }
+
+variable "region" {
+  description = "The region of the recording bucket in AWS."
+  type        = string
+}
+
+variable "aws_recording_bucket_name" {
+  description = "The name of the AWS S3 bucket to store Boundary session recordings."
+  type        = string
+}
+
+variable "aws_iam_access_key_boundary_session_recording_id" {
+  description = "The AWS IAM Access Key ID for the Boundary Session Recording bucket."
+  type        = string
+}
+
+variable "aws_iam_access_key_boundary_session_recording_secret" {
+  description = "The AWS IAM Access Key Secret for the Boundary Session Recording bucket."
+  type        = string
+  sensitive = true
+}
