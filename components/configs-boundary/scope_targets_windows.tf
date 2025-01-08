@@ -58,6 +58,7 @@ resource "boundary_target" "win_http" {
   name                     = "Windows HTTP"
   description              = "Windows HTTP Target"
   scope_id                 = boundary_scope.project.id
+  egress_worker_filter     = " \"worker_ssh\" in \"/tags/type\" "
   session_connection_limit = -1
   default_port             = 80
   host_source_ids = [
