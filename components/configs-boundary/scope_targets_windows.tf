@@ -73,11 +73,18 @@ resource "boundary_target" "win_http" {
   */
 }
 
-
-resource "boundary_alias_target" "scenario2_win_rdp" {
+resource "boundary_alias_target" "win_rdp" {
   name           = "Windows RDP Alias"
   description    = "Windows RDP Alias"
   scope_id       = "global"
   value          = "rdp.boundary.demo"
   destination_id = boundary_target.win_rdp.id
+}
+
+resource "boundary_alias_target" "win_http" {
+  name           = "Windows HTTP Alias"
+  description    = "Windows HTTP Alias"
+  scope_id       = "global"
+  value          = "http-win.boundary.demo"
+  destination_id = boundary_target.win_http
 }

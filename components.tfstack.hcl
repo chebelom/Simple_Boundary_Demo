@@ -66,41 +66,39 @@ component "vault-config" {
   }
 }
 
-# removed {
-#  source = "./components/configs-boundary"
-#  from = component.boundary
-#   providers = {
-#     aws       = provider.aws.this
-#     boundary  = provider.boundary.this
-#     cloudinit = provider.cloudinit.this
-#     null = provider.null.this
-#   }
-# }
-
-component "boundary" {
-  source = "./components/configs-boundary"
+removed {
+ source = "./components/configs-boundary"
+ from = component.boundary
   providers = {
     aws       = provider.aws.this
     boundary  = provider.boundary.this
     cloudinit = provider.cloudinit.this
-    # null = provider.null.this
-  }
-  inputs = {
-    boundary_address             = component.hcp_clusters.boundary_public_url
-    boundary_vault_token_db      = component.vault-config.boundary_vault_token_db
-    boundary_vault_token_ssh     = component.vault-config.boundary_vault_token_ssh
-    boundary_vault_token_windows = component.vault-config.boundary_vault_token_windows
-    postgres_private_ip          = component.infra.postgres_private_ip
-    vault_address                = component.hcp_clusters.vault_public_url
-    vault_cluster_id             = var.vault_cluster_id
-    aws_ssh_key                  = var.key_pair_name
-    private_sg                   = component.networking.private_sg
-    rec_worker_subnet            = component.networking.private_subnet1
-    ssh_inject_private_ip        = component.infra.ssh_inject_private_ip
-    windows_server_private_ip    = component.infra.windows_private_ip
-    aws_iam_access_key_boundary_session_recording_id = component.infra.aws_iam_access_key_boundary_session_recording_id
-    aws_iam_access_key_boundary_session_recording_secret = component.infra.aws_iam_access_key_boundary_session_recording_secret
-    aws_recording_bucket_name = component.infra.aws_recording_bucket_name
-    region = var.region
   }
 }
+
+# component "boundary" {
+#   source = "./components/configs-boundary"
+#   providers = {
+#     aws       = provider.aws.this
+#     boundary  = provider.boundary.this
+#     cloudinit = provider.cloudinit.this
+#   }
+#   inputs = {
+#     boundary_address             = component.hcp_clusters.boundary_public_url
+#     boundary_vault_token_db      = component.vault-config.boundary_vault_token_db
+#     boundary_vault_token_ssh     = component.vault-config.boundary_vault_token_ssh
+#     boundary_vault_token_windows = component.vault-config.boundary_vault_token_windows
+#     postgres_private_ip          = component.infra.postgres_private_ip
+#     vault_address                = component.hcp_clusters.vault_public_url
+#     vault_cluster_id             = var.vault_cluster_id
+#     aws_ssh_key                  = var.key_pair_name
+#     private_sg                   = component.networking.private_sg
+#     rec_worker_subnet            = component.networking.private_subnet1
+#     ssh_inject_private_ip        = component.infra.ssh_inject_private_ip
+#     windows_server_private_ip    = component.infra.windows_private_ip
+#     aws_iam_access_key_boundary_session_recording_id = component.infra.aws_iam_access_key_boundary_session_recording_id
+#     aws_iam_access_key_boundary_session_recording_secret = component.infra.aws_iam_access_key_boundary_session_recording_secret
+#     aws_recording_bucket_name = component.infra.aws_recording_bucket_name
+#     region = var.region
+#   }
+# }
