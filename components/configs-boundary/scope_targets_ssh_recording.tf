@@ -198,7 +198,7 @@ resource "boundary_storage_bucket" "boundary_recordings" {
 #   ]
 # }
 
-resource "boundary_target" "ec2" {
+resource "boundary_target" "ssh_rec" {
   type                     = "ssh"
   name                     = "SSH_Session_Recording_Target"
   description              = "Static Ubuntu"
@@ -225,6 +225,6 @@ resource "boundary_alias_target" "scenario_ssh_rec" {
   description    = "The alias used to access the SSH private resource and record the actions"
   scope_id       = "global"
   value          = "rec.ssh.boundary.demo"
-  destination_id = boundary_target.ssh.id
+  destination_id = boundary_target.ssh_rec.id
   #authorize_session_host_id = boundary_host_static.bar.id
 }

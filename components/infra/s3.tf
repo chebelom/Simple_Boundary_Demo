@@ -24,7 +24,7 @@ resource "random_id" "bucket_name" {
 }
 
 resource "aws_s3_bucket" "storage_bucket" {
-  bucket        = random_id.bucket_name.dec
+  bucket        = "stacks-boundary-recordings"
   force_destroy = true
 
   tags = {
