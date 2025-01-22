@@ -147,7 +147,7 @@ resource "boundary_storage_bucket" "boundary_recordings" {
 }
 
 
-resource "boundary_storage_bucket" "ya_boundary_recordings" {
+resource "boundary_storage_bucket" "ya_boundary_recordings1" {
   name        = "Boundary SSH Recordings"
   description = "The bucket that stores ssh sessions recordings!"
   scope_id    = "global"
@@ -241,7 +241,7 @@ resource "boundary_target" "ssh_rec" {
   ]
 
   enable_session_recording = true
-  storage_bucket_id        = boundary_storage_bucket.ya_boundary_recordings.id
+  storage_bucket_id        = boundary_storage_bucket.ya_boundary_recordings1.id
 
   injected_application_credential_source_ids = [
     boundary_credential_library_vault_ssh_certificate.ssh.id
