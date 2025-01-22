@@ -148,7 +148,7 @@ resource "boundary_storage_bucket" "boundary_recordings" {
 
 
 resource "boundary_storage_bucket" "ya_boundary_recordings1" {
-  name        = "Boundary SSH Recordings"
+  name        = "Boundary SSH Recordings AGAIN"
   description = "The bucket that stores ssh sessions recordings!"
   scope_id    = "global"
   plugin_name = "aws"
